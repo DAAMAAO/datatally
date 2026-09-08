@@ -1,6 +1,19 @@
 # DataTally — Publishing & Release Notes
 
-**Date**: 2026-09-08 · **Version**: 0.1.0 · **Status**: publish-ready, all in-repo validations green
+**Date**: 2026-09-08 · **Current version**: 0.1.1 (published 0.1.0 is live; 0.1.1 tarball built, publish pending re-login)
+
+## Changelog
+
+### 0.1.1 — multi-source adapters
+
+- Four public-source adapters (`src/snapshot/fetchers/`): Hugging Face (incl. model uses), ModelScope mirror probing, DataCite citation counts, GitHub stars/forks/commits behind a curated dataset→repo map.
+- `datatally refresh` CLI command: re-fetches all four sources into a new snapshot (+ `raw_dump.json` audit file). Channels via `DATATALLY_HF_BASE` / `DATATALLY_MODELSCOPE_BASE` / `DATATALLY_GITHUB_TOKEN`.
+- Provenance hardening: `model_uses` is exact below the scan cap and recorded as `model_uses_min` (honest lower bound) at the cap — never a rounded exact number.
+- Seed re-fetched live: 5/10 assets now multi-source (imdb/squad/mnist ← ModelScope mirrors; common_voice/voxpopuli ← curated GitHub repos). Test suite grew to 51 tests.
+
+### 0.1.0 — initial release
+
+- Published to npm as `datatally@0.1.0` (2026-09-08); three tools, strict loader, CLI, 34 tests.
 
 ## What has been validated (this session, real runs)
 
@@ -35,8 +48,8 @@ The full pipeline — repo → tarball → `dsh plugin add` → bundle activatio
 - `pnpm` (required by `dsh plugin`) was run via a corepack shim with `COREPACK_HOME` and `LOCALAPPDATA` redirected into the workspace; `pnpm-workspace.yaml` needed an `allowBuilds` entry per native package.
 - The profile's `autoInstallPeers: false` means plugin **peer** packages must already exist in the deployment — identical to the official dsh tool plugins' convention (they ship the same way).
 
-## Known scope notes (V0.1)
+## Known scope notes (V0.1.1)
 
-- Single source (huggingface) for all seed assets — marked per asset, never hidden. DataCite/GitHub adapters are future work; the fetcher script already reserves the DataCite path.
+- 5/10 seed assets are single-source (marked per asset, never hidden): the rest lack ModelScope mirrors, card DOIs, or curated GitHub repos. DataCite fires only when a dataset card carries a DOI; GitHub only for the curated map (attribution safety > coverage).
+- ModelScope mirror counts and hf-mirror counts are each mirror's own index; provenance (`fetched_at`) is exact either way, and per-source separation keeps every number attributable.
 - `presentCall`/`presentResult` UI cards ship as generic cards (spec-compliant); richer cards are additive.
-- Mirror-based seed counts may differ from hf.co counters; provenance (`fetched_at`) is exact either way.

@@ -132,6 +132,7 @@ The same core, in a terminal (the thin-wrapper form over the plugin core):
 datatally profile stanfordnlp/imdb
 datatally search sentiment --domain nlp --limit 5
 datatally compare HuggingFaceFW/fineweb allenai/c4
+datatally refresh                 # re-fetch the four public sources into a new snapshot
 # snapshot location: --snapshot <path> or DATATALLY_SNAPSHOT env
 ```
 
@@ -145,10 +146,11 @@ src/
 ├── core/                 # pure query logic (no harness deps) + text rendering
 ├── tools/                # one defineTool per file: schema + execute + render + UI cards
 ├── snapshot/             # loader (strict validation, fail-loud), types, AssetId brand
+│   └── fetchers/         # four-source refresh pipeline (HF/ModelScope/DataCite/GitHub)
 ├── schema/               # strict snapshot validator
-cli/main.ts               # CLI (same core)
-test/                     # unit + keyless drive tests (ctx.tools.execute) + recorded goldens
-data/snapshot_v2.json     # seed snapshot (10 real HF datasets)
+cli/main.ts               # CLI (same core + refresh)
+test/                     # 51 tests: unit + fetchers + pipeline + keyless drive + goldens
+data/snapshot_v2.json     # seed snapshot (10 real HF datasets, multi-source)
 cordis.patch.yml          # bundle patch (installed) / dev patch (checkout)
 ```
 
@@ -160,7 +162,25 @@ cordis.patch.yml          # bundle patch (installed) / dev patch (checkout)
 
 ## Data provenance
 
-The seed snapshot carries **real public usage data** for 10 open Hugging Face datasets, fetched 2026-09-08 via the Hugging Face public API (fetched through the hf-mirror.com mirror — counts are the mirror's own index, which can differ from hf.co's counters; every number carries its real `fetched_at`). DataCite/GitHub adapters are out of scope for this environment; single-source assets are marked explicitly. A refresh script lives in the companion prototype workspace (`datatally/scripts/fetch-seed.js`).
+The seed snapshot carries **real public usage data** for 10 open Hugging Face datasets, aggregated from up to four public sources (fetched 2026-09-08):
+
+| Source | Signals |
+|--------|---------|
+| Hugging Face Hub | downloads, likes, model uses (deep / shallow / deep) |
+| ModelScope | downloads, likes (mirrored datasets, probed by short name) |
+| DataCite | citation counts (when the dataset card carries a DOI) |
+| GitHub | stars (shallow), forks/commits (deep) — only for **curated** dataset→repo mappings whose repo is the dataset's canonical release home (see `DEFAULT_GITHUB_MAP` in `src/snapshot/fetchers/pipeline.ts`) |
+
+Provenance discipline: every metric carries its `source` + `fetched_at`; `model_uses` is exact below the scan cap and recorded as `model_uses_min` (an honest lower bound) at the cap; single-source assets are marked explicitly ("single source only — multi-source aggregation not met"); missing provenance is never fabricated. Hugging Face numbers were fetched through the hf-mirror.com mirror (counts are the mirror's index, which can differ from hf.co's counters); set `DATATALLY_HF_BASE` to refresh from a different channel.
+
+Refresh the seed yourself (four-source pipeline, same core as the plugin):
+
+```bash
+datatally refresh --snapshot ./data/snapshot_v2.json
+# env: DATATALLY_HF_BASE (default https://huggingface.co),
+#      DATATALLY_MODELSCOPE_BASE (default https://modelscope.cn),
+#      DATATALLY_GITHUB_TOKEN (optional, raises the GitHub rate limit)
+```
 
 ---
 

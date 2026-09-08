@@ -1,6 +1,6 @@
 {
   "version": "2",
-  "generated_at": "2026-09-08T12:32:11.463Z",
+  "generated_at": "2026-09-08T14:36:19.564Z",
   "assets": [
     {
       "asset_id": "stanfordnlp/imdb",
@@ -40,9 +40,27 @@
             "likes": {
               "value": 709,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 193,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:35:47.474Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 4105,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 16,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T14:35:50.957Z"
         }
       ],
       "timeline": [
@@ -88,22 +106,40 @@
           "source": "huggingface",
           "metrics": {
             "downloads": {
-              "value": 263988,
+              "value": 260686,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 718,
+              "value": 721,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 85,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T14:35:51.496Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 4926,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 7,
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:35:54.399Z"
         }
       ],
       "timeline": [
         {
           "date": "2026-09",
           "metric": "downloads",
-          "value": 263988,
+          "value": 260686,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -142,22 +178,40 @@
           "source": "huggingface",
           "metrics": {
             "downloads": {
-              "value": 68027,
+              "value": 67497,
               "signal_type": "deep"
             },
             "likes": {
               "value": 267,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 44,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:35:55.074Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 325,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T14:35:56.832Z"
         }
       ],
       "timeline": [
         {
           "date": "2026-09",
           "metric": "downloads",
-          "value": 68027,
+          "value": 67497,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -188,9 +242,31 @@
             "likes": {
               "value": 43,
               "signal_type": "shallow"
+            },
+            "model_uses_min": {
+              "value": 500,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:35:58.131Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 3486,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 866,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 54167,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T14:36:00.878Z"
         }
       ],
       "timeline": [
@@ -198,6 +274,58 @@
           "date": "2026-09",
           "metric": "downloads",
           "value": 3516,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "oscar-corpus/OSCAR-2301",
+      "id_type": "hf",
+      "name": "OSCAR-2301",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:fill-mask",
+        "task_categories:text-generation",
+        "task_ids:language-modeling",
+        "multilinguality:multilingual",
+        "source_datasets:original",
+        "license:cc0-1.0",
+        "size_categories:n>1T",
+        "arxiv:2212.10440",
+        "arxiv:2010.14571",
+        "region:us"
+      ],
+      "description": "The Open Super-large Crawled Aggregated coRpus is a huge multilingual corpus obtained by language classification and filtering of the Common Crawl corpus using the Ungoliant architecture.\\",
+      "access": "open",
+      "license": "cc0-1.0",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 2915,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 186,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 139,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T14:36:02.532Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 2915,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -231,22 +359,26 @@
           "source": "huggingface",
           "metrics": {
             "downloads": {
-              "value": 425297,
+              "value": 422422,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 3293,
+              "value": 3296,
               "signal_type": "shallow"
+            },
+            "model_uses_min": {
+              "value": 500,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:36:05.575Z"
         }
       ],
       "timeline": [
         {
           "date": "2026-09",
           "metric": "downloads",
-          "value": 425297,
+          "value": 422422,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -285,22 +417,26 @@
           "source": "huggingface",
           "metrics": {
             "downloads": {
-              "value": 1284611,
+              "value": 1286404,
               "signal_type": "deep"
             },
             "likes": {
               "value": 643,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 326,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:36:11.242Z"
         }
       ],
       "timeline": [
         {
           "date": "2026-09",
           "metric": "downloads",
-          "value": 1284611,
+          "value": 1286404,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -345,9 +481,31 @@
             "likes": {
               "value": 161,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 452,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:36:14.191Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 573,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 71,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 25,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T14:36:15.424Z"
         }
       ],
       "timeline": [
@@ -387,9 +545,13 @@
             "likes": {
               "value": 82,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:36:18.306Z"
         }
       ],
       "timeline": [
@@ -432,9 +594,13 @@
             "likes": {
               "value": 183,
               "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 1,
+              "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
+          "fetched_at": "2026-09-08T14:36:19.367Z"
         }
       ],
       "timeline": [
@@ -442,52 +608,6 @@
           "date": "2026-09",
           "metric": "downloads",
           "value": 1974680,
-          "source": "huggingface",
-          "signal_type": "deep"
-        }
-      ],
-      "citations": []
-    },
-    {
-      "asset_id": "m-a-p/FineFineWeb",
-      "id_type": "hf",
-      "name": "FineFineWeb",
-      "domain": "nlp",
-      "tags": [
-        "task_categories:text-classification",
-        "task_categories:text-generation",
-        "language:en",
-        "license:apache-2.0",
-        "size_categories:1B<n<10B",
-        "modality:tabular",
-        "modality:text",
-        "region:us"
-      ],
-      "description": "FineFineWeb: A Comprehensive Study on Fine-Grained Domain Web Corpus arXiv: Coming Soon Project Page: Coming Soon Blog: Coming Soon Data Statistics Domain (#tokens/#samples) Iteration 1 Tokens Iteration 2 Tokens Iteration 3 Tokens Total Tokens Iteration 1 Count Iteration 2 Count Iteration 3 Count Total Count aerospace 5.77B 261.63M 309.33M 6.34B 9100000 688505 611034 10399539 agronomy 13.08B 947.41M 229.04M 14.26B 15752828 2711790 649404 19114022… See the full description on the dataset page: https://huggingface.co/datasets/m-a-p/FineFineWeb.",
-      "access": "open",
-      "license": "apache-2.0",
-      "verification": "public_api",
-      "sources": [
-        {
-          "source": "huggingface",
-          "metrics": {
-            "downloads": {
-              "value": 1837605,
-              "signal_type": "deep"
-            },
-            "likes": {
-              "value": 174,
-              "signal_type": "shallow"
-            }
-          },
-          "fetched_at": "2026-09-08T12:32:11.463Z"
-        }
-      ],
-      "timeline": [
-        {
-          "date": "2026-09",
-          "metric": "downloads",
-          "value": 1837605,
           "source": "huggingface",
           "signal_type": "deep"
         }

@@ -5,13 +5,21 @@
  *   datatally profile <asset_id>
  *   datatally search <query> [--domain <domain>] [--limit <n>]
  *   datatally compare <asset_id_a> <asset_id_b>
+ *   datatally refresh [--limit <n>] [--snapshot <path>]
  *
  * Snapshot location: --snapshot <path> or the DATATALLY_SNAPSHOT env var;
  * defaults to ./data/snapshot_v2.json.
+ *
+ * Refresh env (adapter channels): DATATALLY_HF_BASE (default https://huggingface.co;
+ * use https://hf-mirror.com when hf.co is unreachable), DATATALLY_MODELSCOPE_BASE
+ * (default https://modelscope.cn), DATATALLY_GITHUB_TOKEN (optional, raises the
+ * GitHub rate limit).
  */
-import { resolve } from 'node:path'
+import { mkdirSync, writeFileSync } from 'node:fs'
+import { dirname, resolve } from 'node:path'
 import { buildProfile, compareAssets, requireAsset, searchAssets } from '../src/core/query.js'
 import { renderCompareText, renderProfileText, renderSearchText } from '../src/core/render.js'
+import { DEFAULT_FAMOUS, DEFAULT_GITHUB_MAP, refreshSnapshot } from '../src/snapshot/fetchers/pipeline.js'
 import { createSnapshotLoader } from '../src/snapshot/loader.js'
 
 const USAGE = [
@@ -21,10 +29,12 @@ const USAGE = [
   '  profile <asset_id>              full usage profile of one asset',
   '  search <query>                 search assets by keyword',
   '  compare <asset_id_a> <asset_id_b>  compare two assets (same signal layer)',
+  '  refresh                        fetch all four public sources and write a new snapshot',
   '',
   'options:',
   '  --domain <domain>   domain filter for search (nlp, vision, audio, ...)',
-  '  --limit <n>         max search results (default 20)',
+  '  --limit <n>         search: max results (default 20); refresh: asset count (default 10)',
+  '  --top <n>           refresh: top-downloads candidates to consider (default 15)',
   '  --snapshot <path>   snapshot file (or env DATATALLY_SNAPSHOT; default ./data/snapshot_v2.json)',
 ].join('\n')
 
@@ -32,6 +42,7 @@ interface CliOptions {
   snapshot: string
   domain?: string
   limit?: number
+  top?: number
 }
 
 function parseArgs(argv: string[]): { command: string; rest: string[]; options: CliOptions } {
@@ -39,7 +50,7 @@ function parseArgs(argv: string[]): { command: string; rest: string[]; options: 
   const positional: string[] = []
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index]!
-    if (token === '--domain' || token === '--limit' || token === '--snapshot') {
+    if (token === '--domain' || token === '--limit' || token === '--snapshot' || token === '--top') {
       const value = argv[index + 1]
       if (value === undefined) {
         console.error(`datatally: option ${token} needs a value`)
@@ -54,6 +65,14 @@ function parseArgs(argv: string[]): { command: string; rest: string[]; options: 
           process.exit(2)
         }
         options.limit = parsed
+      }
+      if (token === '--top') {
+        const parsed = Number(value)
+        if (!Number.isFinite(parsed) || parsed <= 0) {
+          console.error(`datatally: --top must be a positive number, got ${JSON.stringify(value)}`)
+          process.exit(2)
+        }
+        options.top = parsed
       }
       if (token === '--snapshot') options.snapshot = value
     } else if (token.startsWith('--')) {
@@ -104,6 +123,27 @@ async function main(): Promise<void> {
       }
       const comparison = compareAssets(requireAsset(snapshot, a), requireAsset(snapshot, b))
       console.log(renderCompareText(comparison))
+      return
+    }
+    if (command === 'refresh') {
+      const env = {
+        fetchFn: fetch,
+        hfBase: process.env.DATATALLY_HF_BASE ?? 'https://huggingface.co',
+        modelscopeBase: process.env.DATATALLY_MODELSCOPE_BASE ?? 'https://modelscope.cn',
+        githubToken: process.env.DATATALLY_GITHUB_TOKEN,
+      }
+      const result = await refreshSnapshot(env, {
+        limit: options.limit ?? 10,
+        topCount: options.top ?? 15,
+        famous: DEFAULT_FAMOUS,
+        githubMap: DEFAULT_GITHUB_MAP,
+      })
+      const target = resolve(options.snapshot)
+      mkdirSync(dirname(target), { recursive: true })
+      writeFileSync(target, JSON.stringify(result.snapshot, null, 2))
+      writeFileSync(resolve(dirname(target), 'raw_dump.json'), JSON.stringify(result.raw, null, 2))
+      for (const line of result.log) console.log(line)
+      console.log(`wrote ${result.snapshot.assets.length} assets -> ${target}`)
       return
     }
     console.error(`datatally: unknown command ${JSON.stringify(command)}\n\n${USAGE}`)
