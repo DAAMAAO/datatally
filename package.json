@@ -1,0 +1,87 @@
+{
+  "name": "datatally",
+  "version": "0.1.0",
+  "description": "DataTally: verifiable public usage profiles of data assets for DeepSeek Harness. search_assets / get_asset_profile / compare_assets. DataTally records; you judge.",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DAAMAAO/datatally.git"
+  },
+  "homepage": "https://datatally.xyz",
+  "bugs": {
+    "url": "https://github.com/DAAMAAO/datatally/issues"
+  },
+  "main": "lib/src/index.js",
+  "types": "lib/src/index.d.ts",
+  "bin": {
+    "datatally": "lib/cli/main.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/src/index.d.ts",
+      "default": "./lib/src/index.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib/src/**/*.js",
+    "lib/src/**/*.d.ts",
+    "lib/cli/**/*.js",
+    "data/snapshot_v2.json",
+    "cordis.patch.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "license": "MIT",
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "dsh",
+    "data",
+    "datasets",
+    "usage",
+    "provenance",
+    "huggingface"
+  ],
+  "engines": {
+    "node": ">=22.19"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "npm run build && node --test lib/test",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "^0.1.0-rc.6"
+  },
+  "devDependencies": {
+    "@deepseek-ai/cordis": "4.0.1",
+    "@deepseek-ai/dsh-agent": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-brand": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-llm": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-scope": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-session": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-tools": "0.1.0-rc.6",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "@deepseek-ai/dsh-attachment": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-code-runtime": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-invariants": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-system-prompt": "0.1.0-rc.6",
+    "@deepseek-ai/dsh-user-approval": "0.1.0-rc.6"
+  }
+}

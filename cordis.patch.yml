@@ -1,0 +1,17 @@
+# DataTally bundle patch: applied when the package is installed as a profile
+# plugin (`dsh plugin --profile web add datatally`).
+#
+# For pre-install development from a checkout, use `dsh web --patch ./cordis.yml`
+# with `name` replaced by the absolute path to this checkout's src/index.ts:
+#
+#   - insert:
+#       - id: datatally
+#         name: '/absolute/path/to/datatally-plugin/src/index.ts'
+#         config: ...
+- insert:
+    - id: datatally
+      name: 'datatally'
+      config:
+        snapshotPath: './data/snapshot_v2.json'
+        maxResults: 20
+        enableCitationFields: true
