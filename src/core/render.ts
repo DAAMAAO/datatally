@@ -38,7 +38,7 @@ function renderSignals(entries: SignalEntry[]): string {
 export function renderProfileText(value: AssetProfile): string {
   const lines: string[] = [
     `${value.name} (${value.asset_id})`,
-    `access: ${value.access} | license: ${String(value.license)} | verification: ${value.verification} | snapshot: v${value.snapshot_version}`,
+    `access: ${value.access} | license: ${String(value.license)} | verification: ${value.verification} | snapshot: v${value.snapshot_version} | generated_at: ${value.generated_at}`,
     'deep signals (actual use):',
     renderSignals(value.deep_signals),
     'shallow signals (interest only):',
@@ -62,6 +62,7 @@ export function renderProfileText(value: AssetProfile): string {
     }
   }
   lines.push(`profile summary: ${value.profile_summary}`)
+  lines.push('freshness: numbers reflect their fetch time and may lag the live services')
   return lines.join('\n')
 }
 

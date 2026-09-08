@@ -70,7 +70,23 @@ Ask your agent:
 
 > "Find datasets for sentiment analysis and compare the two most used ones."
 
-The agent will call `search_assets`, then `compare_assets`, and answer with sourced usage data.
+The agent will call `search_assets`, then `compare_assets`, and answer with sourced usage data. An actual session transcript:
+
+**User**：帮我找情感分析的数据集，然后对比两个使用最多的
+
+**Agent**（调 `search_assets("sentiment")`）：
+
+> - imdb (stanfordnlp/imdb) | domain: nlp | deep: downloads 195,669 | shallow: likes 725 | fetched_at: 2026-09-08T14:35:50Z | snapshot: v2
+> - glue (nyu-mll/glue) | deep: downloads 826,859 … （共 8 个命中）
+
+**Agent**（调 `compare_assets("nyu-mll/glue", "stanfordnlp/imdb")`）：
+
+> - downloads [deep]: 791,429 vs 197,595 | same_source: true | same_access: true
+> - forks [deep]: 178 vs 0 | same_source: false | same_access: true
+> - likes [shallow]: 741 vs 722 | same_source: true | same_access: true
+> note: cross-source metrics are not directly comparable
+
+**Agent** 的最终回答只陈述记录（引用次数、来源、抓取时间），**不下"哪个更好"的结论**——判断留给用户。
 
 ---
 
@@ -132,9 +148,13 @@ The same core, in a terminal (the thin-wrapper form over the plugin core):
 datatally profile stanfordnlp/imdb
 datatally search sentiment --domain nlp --limit 5
 datatally compare HuggingFaceFW/fineweb allenai/c4
-datatally refresh                 # re-fetch the four public sources into a new snapshot
+datatally refresh                        # re-fetch the four public sources into a new snapshot
+datatally refresh --query protein        # domain-focused catalog: any keyword, no code change
+datatally refresh --filter task_ids:sentiment-classification --limit 30
 # snapshot location: --snapshot <path> or DATATALLY_SNAPSHOT env
 ```
+
+`--query <text>` / `--filter <tag>` are repeatable and replace the shipped default queries; when given, the queried candidates lead the catalog.
 
 ---
 

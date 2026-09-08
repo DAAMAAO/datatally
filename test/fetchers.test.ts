@@ -122,6 +122,8 @@ describe('domain inference', () => {
     ]), 'nlp')
     assert.equal(inferDomain(['task_ids:automatic-speech-recognition', 'modality:audio']), 'audio')
     assert.equal(inferDomain(['task_ids:image-classification', 'modality:image']), 'vision')
+    // storage format yields to the content modality
+    assert.equal(inferDomain(['modality:tabular', 'modality:text', 'task_ids:sentiment-classification']), 'nlp')
   })
 
   it('falls back to word-boundary task patterns without a modality tag', () => {

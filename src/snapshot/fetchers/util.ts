@@ -54,7 +54,10 @@ export function inferDomain(tags: unknown): string {
   const joined = list.join(' ').toLowerCase()
   // Explicit modality tags win: they state the asset's form directly, so
   // task words like "hate-speech-detection" (a TEXT task) cannot misfire.
-  const modality = /modality:([a-z0-9-]+)/.exec(joined)?.[1]
+  // When several modality tags exist, "tabular" (a storage format) yields to
+  // the content modality (text/audio/image/...).
+  const modalityTags = [...joined.matchAll(/modality:([a-z0-9-]+)/g)].map((match) => match[1] ?? '')
+  const modality = modalityTags.find((tag) => tag !== 'tabular') ?? modalityTags[0]
   if (modality !== undefined) {
     if (modality.includes('audio')) return 'audio'
     if (/(image|3d|video|depth)/.test(modality)) return 'vision'

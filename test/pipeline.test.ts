@@ -121,6 +121,27 @@ describe('refresh pipeline', () => {
     assert.deepEqual(ids, ['f1', 'q1', 't1', 't3'])
   })
 
+  it('leads with explicit queries when queriesFirst is set', async () => {
+    const env = scriptedEnv()
+    const originalFetch = env.fetchFn
+    env.fetchFn = (async (input: string | URL | Request) => {
+      const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url
+      if (url.includes('search=protein')) {
+        return json([{ id: 'q1' }])
+      }
+      if (url.endsWith('/api/datasets/q1')) return json(hfDetail('q1'))
+      return originalFetch(input)
+    }) as typeof fetch
+    const result = await refreshSnapshot(env, {
+      ...options,
+      limit: 3,
+      queries: [{ search: 'protein', limit: 1 }],
+      queriesFirst: true,
+    })
+    const ids = result.snapshot.assets.map((asset) => asset.asset_id)
+    assert.deepEqual(ids, ['q1', 'f1', 't1'])
+  })
+
   it('tolerates a failing catalog query without losing the record', async () => {
     const env = scriptedEnv()
     const originalFetch = env.fetchFn

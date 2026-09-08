@@ -22,10 +22,13 @@ export interface PipelineOptions {
   /** Recognizable candidate ids tried first (skipped when gated/absent). */
   famous: readonly string[]
   /**
-   * Extra catalog queries (keyword search or tag filter on Hugging Face),
-   * tried after the famous list and before the top-downloads sweep.
+   * Extra catalog queries (keyword search or tag filter on Hugging Face).
+   * Default order: famous → queries → top-downloads. With `queriesFirst`,
+   * explicit queries lead (the user asked for a domain-focused catalog).
    */
   queries: readonly CatalogQuery[]
+  /** Try the catalog queries before the famous list. */
+  queriesFirst?: boolean
   /**
    * Curated dataset→repository mapping for GitHub signals. Only entries with
    * an unambiguous canonical source repo belong here — attribution errors
@@ -78,15 +81,23 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
     seen.add(id)
     candidates.push(id)
   }
-  for (const id of options.famous) addCandidate(id)
-  for (const query of options.queries) {
-    let ids: string[]
-    try {
-      ids = await fetchHfSearch(env, query)
-    } catch {
-      continue // a failed catalog query shrinks candidates, never the record's honesty
+  const addQueries = async (): Promise<void> => {
+    for (const query of options.queries) {
+      let ids: string[]
+      try {
+        ids = await fetchHfSearch(env, query)
+      } catch {
+        continue // a failed catalog query shrinks candidates, never the record's honesty
+      }
+      for (const id of ids) addCandidate(id)
     }
-    for (const id of ids) addCandidate(id)
+  }
+  if (options.queriesFirst === true) {
+    await addQueries()
+    for (const id of options.famous) addCandidate(id)
+  } else {
+    for (const id of options.famous) addCandidate(id)
+    await addQueries()
   }
   for (const id of topIds) addCandidate(id)
 

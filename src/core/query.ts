@@ -131,6 +131,7 @@ export function profileSummaryText(asset: Asset, snapshot: Snapshot): string {
   const parts = [
     `Usage profile for ${asset.name} (${asset.domain}), ${asset.access} access under ${licenseText}, verified via ${asset.verification}.`,
     `Recorded from ${sources} source${sources === 1 ? '' : 's'}${fetched ? ` at ${fetched}` : ''} (snapshot version ${snapshot.version}).`,
+    `Snapshot generated ${snapshot.generated_at}.`,
   ]
   if (sources < 2) parts.push('single source only — multi-source aggregation not met')
   return parts.join(' ')
@@ -154,6 +155,7 @@ export function buildProfile(
       date, metric, value, source, signal_type,
     })),
     profile_summary: profileSummaryText(asset, snapshot),
+    generated_at: snapshot.generated_at,
     snapshot_version: snapshot.version,
   }
   if (options.includeCitations) {

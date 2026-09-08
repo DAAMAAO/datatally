@@ -102,6 +102,8 @@ export interface AssetProfile {
   /** Omitted when citation fields are disabled by config. */
   citations?: Citation[]
   profile_summary: string
+  /** Snapshot generation time — the record's own freshness stamp. */
+  generated_at: string
   snapshot_version: string
 }
 

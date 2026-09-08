@@ -1,8 +1,15 @@
 # DataTally — Publishing & Release Notes
 
-**Date**: 2026-09-08 · **Current version**: 0.1.2 (0.1.0 and 0.1.1 published; 0.1.2 tarball built, publish pending re-login)
+**Date**: 2026-09-08 · **Current version**: 0.1.3 (0.1.0–0.1.2 published; 0.1.3 tarball built, publish pending re-login)
 
 ## Changelog
+
+### 0.1.3 — generic catalog queries
+
+- `datatally refresh --query <text> / --filter <tag>` (repeatable): any domain is reachable with one command — no code change per query. Explicit queries replace the shipped defaults and lead the candidate order (`queriesFirst`).
+- Fixed: `refresh` no longer requires a pre-existing snapshot file (the load is now per-command).
+- Fixed: dual `modality:tabular`+`modality:text` tags (storage format vs content) no longer misclassify — glue is `nlp` again; storage format yields to content modality.
+- Test suite grew to 60 tests.
 
 ### 0.1.2 — expanded catalog & multi-source coverage
 

@@ -35,22 +35,30 @@ const USAGE = [
   '  --domain <domain>   domain filter for search (nlp, vision, audio, ...)',
   '  --limit <n>         search: max results (default 20); refresh: asset count (default 25)',
   '  --top <n>           refresh: top-downloads candidates to consider (default 20)',
+  '  --query <text>      refresh: keyword search on HF (repeatable; replaces the default queries)',
+  '  --filter <tag>      refresh: tag filter on HF, e.g. task_ids:sentiment-classification (repeatable)',
   '  --snapshot <path>   snapshot file (or env DATATALLY_SNAPSHOT; default ./data/snapshot_v2.json)',
 ].join('\n')
+
+interface CatalogCliQuery {
+  kind: 'search' | 'filter'
+  value: string
+}
 
 interface CliOptions {
   snapshot: string
   domain?: string
   limit?: number
   top?: number
+  queries: CatalogCliQuery[]
 }
 
 function parseArgs(argv: string[]): { command: string; rest: string[]; options: CliOptions } {
-  const options: CliOptions = { snapshot: process.env.DATATALLY_SNAPSHOT ?? './data/snapshot_v2.json' }
+  const options: CliOptions = { snapshot: process.env.DATATALLY_SNAPSHOT ?? './data/snapshot_v2.json', queries: [] }
   const positional: string[] = []
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index]!
-    if (token === '--domain' || token === '--limit' || token === '--snapshot' || token === '--top') {
+    if (token === '--domain' || token === '--limit' || token === '--snapshot' || token === '--top' || token === '--query' || token === '--filter') {
       const value = argv[index + 1]
       if (value === undefined) {
         console.error(`datatally: option ${token} needs a value`)
@@ -74,6 +82,8 @@ function parseArgs(argv: string[]): { command: string; rest: string[]; options: 
         }
         options.top = parsed
       }
+      if (token === '--query') options.queries.push({ kind: 'search', value })
+      if (token === '--filter') options.queries.push({ kind: 'filter', value })
       if (token === '--snapshot') options.snapshot = value
     } else if (token.startsWith('--')) {
       console.error(`datatally: unknown option ${token}\n\n${USAGE}`)
@@ -93,8 +103,8 @@ async function main(): Promise<void> {
   const { command, rest, options } = parseArgs(process.argv.slice(2))
   const loader = createSnapshotLoader(options.snapshot)
   try {
-    const snapshot = await loader.load()
     if (command === 'profile') {
+      const snapshot = await loader.load()
       const assetId = rest[0]
       if (assetId === undefined) {
         console.error('datatally: profile needs an asset_id\n\n' + USAGE)
@@ -105,6 +115,7 @@ async function main(): Promise<void> {
       return
     }
     if (command === 'search') {
+      const snapshot = await loader.load()
       const query = rest[0]
       if (query === undefined) {
         console.error('datatally: search needs a query\n\n' + USAGE)
@@ -115,6 +126,7 @@ async function main(): Promise<void> {
       return
     }
     if (command === 'compare') {
+      const snapshot = await loader.load()
       const a = rest[0]
       const b = rest[1]
       if (a === undefined || b === undefined) {
@@ -132,11 +144,19 @@ async function main(): Promise<void> {
         modelscopeBase: process.env.DATATALLY_MODELSCOPE_BASE ?? 'https://modelscope.cn',
         githubToken: process.env.DATATALLY_GITHUB_TOKEN,
       }
+      // Explicit --query/--filter flags replace the shipped default queries —
+      // any domain is reachable without a code change.
+      const cliQueries = options.queries.map((entry): { search: string; limit: number } | { filter: string; limit: number } => (
+        entry.kind === 'search'
+          ? { search: entry.value, limit: 10 }
+          : { filter: entry.value, limit: 10 }
+      ))
       const result = await refreshSnapshot(env, {
         limit: options.limit ?? 25,
         topCount: options.top ?? 20,
         famous: DEFAULT_FAMOUS,
-        queries: DEFAULT_QUERIES,
+        queries: cliQueries.length > 0 ? cliQueries : DEFAULT_QUERIES,
+        queriesFirst: cliQueries.length > 0,
         githubMap: DEFAULT_GITHUB_MAP,
       })
       const target = resolve(options.snapshot)

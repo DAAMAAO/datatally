@@ -44,7 +44,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:28.183Z"
+        "fetched_at": "2026-09-08T16:10:46.320Z"
       }
     ]
   },
@@ -93,7 +93,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:29.227Z"
+        "fetched_at": "2026-09-08T16:10:46.835Z"
       }
     ]
   },
@@ -142,7 +142,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:29.764Z"
+        "fetched_at": "2026-09-08T16:10:47.188Z"
       }
     ]
   },
@@ -177,7 +177,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:30.627Z"
+        "fetched_at": "2026-09-08T16:10:47.682Z"
       }
     ]
   },
@@ -220,14 +220,14 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:33.183Z"
+        "fetched_at": "2026-09-08T16:10:49.938Z"
       }
     ]
   },
   {
     "asset_id": "HuggingFaceFW/fineweb",
     "name": "fineweb",
-    "domain": "tabular",
+    "domain": "nlp",
     "tags": [
       "task_categories:text-generation",
       "language:en",
@@ -264,7 +264,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:34.351Z"
+        "fetched_at": "2026-09-08T16:10:50.873Z"
       }
     ]
   },
@@ -313,7 +313,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:36.333Z"
+        "fetched_at": "2026-09-08T16:10:52.481Z"
       }
     ]
   },
@@ -362,14 +362,14 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:36.899Z"
+        "fetched_at": "2026-09-08T16:10:52.964Z"
       }
     ]
   },
   {
     "asset_id": "nyu-mll/glue",
     "name": "glue",
-    "domain": "tabular",
+    "domain": "nlp",
     "tags": [
       "task_categories:text-classification",
       "task_ids:acceptability-classification",
@@ -411,7 +411,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:38.319Z"
+        "fetched_at": "2026-09-08T16:10:54.355Z"
       }
     ]
   },
@@ -460,7 +460,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:40.019Z"
+        "fetched_at": "2026-09-08T16:10:55.488Z"
       }
     ]
   },
@@ -509,7 +509,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:41.102Z"
+        "fetched_at": "2026-09-08T16:10:55.955Z"
       }
     ]
   },
@@ -558,7 +558,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:41.643Z"
+        "fetched_at": "2026-09-08T16:10:56.348Z"
       }
     ]
   },
@@ -607,7 +607,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:43.197Z"
+        "fetched_at": "2026-09-08T16:10:57.431Z"
       }
     ]
   },
@@ -656,7 +656,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:45.203Z"
+        "fetched_at": "2026-09-08T16:10:58.537Z"
       }
     ]
   },
@@ -705,7 +705,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:45.661Z"
+        "fetched_at": "2026-09-08T16:10:58.940Z"
       }
     ]
   },
@@ -742,7 +742,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:51.397Z"
+        "fetched_at": "2026-09-08T16:11:03.859Z"
       }
     ]
   },
@@ -782,14 +782,14 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:52.229Z"
+        "fetched_at": "2026-09-08T16:11:05.197Z"
       }
     ]
   },
   {
     "asset_id": "m-a-p/FineFineWeb",
     "name": "FineFineWeb",
-    "domain": "tabular",
+    "domain": "nlp",
     "tags": [
       "task_categories:text-classification",
       "task_categories:text-generation",
@@ -823,7 +823,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:53.465Z"
+        "fetched_at": "2026-09-08T16:11:06.514Z"
       }
     ]
   },
@@ -872,7 +872,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:53.909Z"
+        "fetched_at": "2026-09-08T16:11:06.967Z"
       }
     ]
   },
@@ -911,7 +911,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:55.559Z"
+        "fetched_at": "2026-09-08T16:11:08.458Z"
       }
     ]
   },
@@ -945,7 +945,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:56.040Z"
+        "fetched_at": "2026-09-08T16:11:09.127Z"
       }
     ]
   },
@@ -981,7 +981,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:56.541Z"
+        "fetched_at": "2026-09-08T16:11:09.697Z"
       }
     ]
   },
@@ -1023,7 +1023,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:56.799Z"
+        "fetched_at": "2026-09-08T16:11:10.055Z"
       }
     ]
   },
@@ -1072,7 +1072,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:40:58.016Z"
+        "fetched_at": "2026-09-08T16:11:10.674Z"
       }
     ]
   },
@@ -1106,7 +1106,7 @@
             "signal_type": "deep"
           }
         },
-        "fetched_at": "2026-09-08T15:41:02.617Z"
+        "fetched_at": "2026-09-08T16:11:12.851Z"
       }
     ]
   }

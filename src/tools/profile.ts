@@ -86,6 +86,7 @@ export function registerProfileTool(loader: SnapshotLoader, options: ProfileTool
             },
           },
           profile_summary: { type: 'string' },
+          generated_at: { type: 'string' },
           snapshot_version: { type: 'string' },
         },
       },

@@ -31,7 +31,7 @@ describe('recorded outputs', () => {
     const value = buildProfile(fixtureSnapshot, asset, { includeCitations: true })
     assert.equal(renderProfileText(value), [
       'imdb (stanfordnlp/imdb)',
-      'access: open | license: null | verification: public_api | snapshot: v2',
+      'access: open | license: null | verification: public_api | snapshot: v2 | generated_at: 2026-09-06T12:00:00Z',
       'deep signals (actual use):',
       '  - downloads: 191564 (source: huggingface, fetched_at: 2026-09-06T12:00:00Z)',
       'shallow signals (interest only):',
@@ -40,7 +40,8 @@ describe('recorded outputs', () => {
       '  - 2026-09 downloads: 191564 (source: huggingface, deep)',
       'citations:',
       '  (none recorded)',
-      'profile summary: Usage profile for imdb (nlp), open access under no license recorded, verified via public_api. Recorded from 1 source at 2026-09-06T12:00:00Z (snapshot version 2). single source only — multi-source aggregation not met',
+      'profile summary: Usage profile for imdb (nlp), open access under no license recorded, verified via public_api. Recorded from 1 source at 2026-09-06T12:00:00Z (snapshot version 2). Snapshot generated 2026-09-06T12:00:00Z. single source only — multi-source aggregation not met',
+      'freshness: numbers reflect their fetch time and may lag the live services',
     ].join('\n'))
   })
 

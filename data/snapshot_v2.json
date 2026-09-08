@@ -1,6 +1,6 @@
 {
   "version": "2",
-  "generated_at": "2026-09-08T15:41:03.324Z",
+  "generated_at": "2026-09-08T16:11:13.125Z",
   "assets": [
     {
       "asset_id": "stanfordnlp/imdb",
@@ -46,13 +46,13 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:28.183Z"
+          "fetched_at": "2026-09-08T16:10:46.320Z"
         },
         {
           "source": "modelscope",
           "metrics": {
             "downloads": {
-              "value": 269,
+              "value": 281,
               "signal_type": "deep"
             },
             "likes": {
@@ -60,7 +60,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:28.482Z"
+          "fetched_at": "2026-09-08T16:10:46.604Z"
         }
       ],
       "timeline": [
@@ -118,7 +118,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:29.227Z"
+          "fetched_at": "2026-09-08T16:10:46.835Z"
         },
         {
           "source": "modelscope",
@@ -132,7 +132,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:29.368Z"
+          "fetched_at": "2026-09-08T16:10:46.975Z"
         }
       ],
       "timeline": [
@@ -190,7 +190,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:29.764Z"
+          "fetched_at": "2026-09-08T16:10:47.188Z"
         },
         {
           "source": "modelscope",
@@ -204,7 +204,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:29.926Z"
+          "fetched_at": "2026-09-08T16:10:47.350Z"
         }
       ],
       "timeline": [
@@ -248,7 +248,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:30.627Z"
+          "fetched_at": "2026-09-08T16:10:47.682Z"
         },
         {
           "source": "modelscope",
@@ -262,7 +262,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:30.746Z"
+          "fetched_at": "2026-09-08T16:10:47.794Z"
         },
         {
           "source": "github",
@@ -280,7 +280,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:32.657Z"
+          "fetched_at": "2026-09-08T16:10:49.526Z"
         }
       ],
       "timeline": [
@@ -332,7 +332,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:33.183Z"
+          "fetched_at": "2026-09-08T16:10:49.938Z"
         }
       ],
       "timeline": [
@@ -350,7 +350,7 @@
       "asset_id": "HuggingFaceFW/fineweb",
       "id_type": "hf",
       "name": "fineweb",
-      "domain": "tabular",
+      "domain": "nlp",
       "tags": [
         "task_categories:text-generation",
         "language:en",
@@ -385,7 +385,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:34.351Z"
+          "fetched_at": "2026-09-08T16:10:50.873Z"
         }
       ],
       "timeline": [
@@ -443,7 +443,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:36.333Z"
+          "fetched_at": "2026-09-08T16:10:52.481Z"
         },
         {
           "source": "modelscope",
@@ -457,7 +457,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:36.501Z"
+          "fetched_at": "2026-09-08T16:10:52.639Z"
         }
       ],
       "timeline": [
@@ -515,7 +515,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:36.899Z"
+          "fetched_at": "2026-09-08T16:10:52.964Z"
         },
         {
           "source": "modelscope",
@@ -529,7 +529,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:37.039Z"
+          "fetched_at": "2026-09-08T16:10:53.097Z"
         },
         {
           "source": "github",
@@ -547,7 +547,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:37.989Z"
+          "fetched_at": "2026-09-08T16:10:54.020Z"
         }
       ],
       "timeline": [
@@ -565,7 +565,7 @@
       "asset_id": "nyu-mll/glue",
       "id_type": "hf",
       "name": "glue",
-      "domain": "tabular",
+      "domain": "nlp",
       "tags": [
         "task_categories:text-classification",
         "task_ids:acceptability-classification",
@@ -605,7 +605,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:38.319Z"
+          "fetched_at": "2026-09-08T16:10:54.355Z"
         },
         {
           "source": "modelscope",
@@ -619,7 +619,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:38.471Z"
+          "fetched_at": "2026-09-08T16:10:54.495Z"
         },
         {
           "source": "github",
@@ -637,7 +637,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:39.715Z"
+          "fetched_at": "2026-09-08T16:10:55.255Z"
         }
       ],
       "timeline": [
@@ -695,7 +695,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:40.019Z"
+          "fetched_at": "2026-09-08T16:10:55.488Z"
         }
       ],
       "timeline": [
@@ -753,7 +753,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:41.102Z"
+          "fetched_at": "2026-09-08T16:10:55.955Z"
         },
         {
           "source": "modelscope",
@@ -767,7 +767,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:41.248Z"
+          "fetched_at": "2026-09-08T16:10:56.075Z"
         }
       ],
       "timeline": [
@@ -825,7 +825,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:41.643Z"
+          "fetched_at": "2026-09-08T16:10:56.348Z"
         },
         {
           "source": "modelscope",
@@ -839,7 +839,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:41.742Z"
+          "fetched_at": "2026-09-08T16:10:56.442Z"
         },
         {
           "source": "github",
@@ -857,7 +857,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:42.509Z"
+          "fetched_at": "2026-09-08T16:10:57.216Z"
         }
       ],
       "timeline": [
@@ -915,7 +915,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:43.197Z"
+          "fetched_at": "2026-09-08T16:10:57.431Z"
         },
         {
           "source": "modelscope",
@@ -929,7 +929,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:43.312Z"
+          "fetched_at": "2026-09-08T16:10:57.541Z"
         },
         {
           "source": "github",
@@ -947,7 +947,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:44.366Z"
+          "fetched_at": "2026-09-08T16:10:58.318Z"
         }
       ],
       "timeline": [
@@ -1005,7 +1005,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:45.203Z"
+          "fetched_at": "2026-09-08T16:10:58.537Z"
         },
         {
           "source": "modelscope",
@@ -1019,7 +1019,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:45.300Z"
+          "fetched_at": "2026-09-08T16:10:58.634Z"
         }
       ],
       "timeline": [
@@ -1077,7 +1077,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:45.661Z"
+          "fetched_at": "2026-09-08T16:10:58.940Z"
         },
         {
           "source": "modelscope",
@@ -1091,7 +1091,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:45.755Z"
+          "fetched_at": "2026-09-08T16:10:59.036Z"
         }
       ],
       "timeline": [
@@ -1137,7 +1137,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:51.397Z"
+          "fetched_at": "2026-09-08T16:11:03.859Z"
         }
       ],
       "timeline": [
@@ -1186,7 +1186,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:52.229Z"
+          "fetched_at": "2026-09-08T16:11:05.197Z"
         },
         {
           "source": "modelscope",
@@ -1200,7 +1200,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:52.401Z"
+          "fetched_at": "2026-09-08T16:11:05.404Z"
         }
       ],
       "timeline": [
@@ -1218,7 +1218,7 @@
       "asset_id": "m-a-p/FineFineWeb",
       "id_type": "hf",
       "name": "FineFineWeb",
-      "domain": "tabular",
+      "domain": "nlp",
       "tags": [
         "task_categories:text-classification",
         "task_categories:text-generation",
@@ -1250,7 +1250,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:53.465Z"
+          "fetched_at": "2026-09-08T16:11:06.514Z"
         },
         {
           "source": "modelscope",
@@ -1264,7 +1264,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:53.597Z"
+          "fetched_at": "2026-09-08T16:11:06.660Z"
         }
       ],
       "timeline": [
@@ -1322,7 +1322,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:53.909Z"
+          "fetched_at": "2026-09-08T16:11:06.967Z"
         },
         {
           "source": "modelscope",
@@ -1336,7 +1336,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:54.056Z"
+          "fetched_at": "2026-09-08T16:11:07.153Z"
         }
       ],
       "timeline": [
@@ -1384,7 +1384,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:55.559Z"
+          "fetched_at": "2026-09-08T16:11:08.458Z"
         }
       ],
       "timeline": [
@@ -1427,7 +1427,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:56.040Z"
+          "fetched_at": "2026-09-08T16:11:09.127Z"
         }
       ],
       "timeline": [
@@ -1472,7 +1472,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:56.541Z"
+          "fetched_at": "2026-09-08T16:11:09.697Z"
         },
         {
           "source": "modelscope",
@@ -1486,7 +1486,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:56.633Z"
+          "fetched_at": "2026-09-08T16:11:09.797Z"
         }
       ],
       "timeline": [
@@ -1537,7 +1537,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:56.799Z"
+          "fetched_at": "2026-09-08T16:11:10.055Z"
         }
       ],
       "timeline": [
@@ -1595,7 +1595,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:58.016Z"
+          "fetched_at": "2026-09-08T16:11:10.674Z"
         },
         {
           "source": "modelscope",
@@ -1609,7 +1609,7 @@
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T15:40:58.199Z"
+          "fetched_at": "2026-09-08T16:11:10.829Z"
         },
         {
           "source": "github",
@@ -1627,7 +1627,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:40:59.195Z"
+          "fetched_at": "2026-09-08T16:11:11.765Z"
         }
       ],
       "timeline": [
@@ -1670,7 +1670,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T15:41:02.617Z"
+          "fetched_at": "2026-09-08T16:11:12.851Z"
         }
       ],
       "timeline": [
