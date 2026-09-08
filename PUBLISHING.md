@@ -1,8 +1,17 @@
 # DataTally — Publishing & Release Notes
 
-**Date**: 2026-09-08 · **Current version**: 0.1.1 (published 0.1.0 is live; 0.1.1 tarball built, publish pending re-login)
+**Date**: 2026-09-08 · **Current version**: 0.1.2 (0.1.0 and 0.1.1 published; 0.1.2 tarball built, publish pending re-login)
 
 ## Changelog
+
+### 0.1.2 — expanded catalog & multi-source coverage
+
+- Catalog queries in the refresh pipeline: extra keyword/tag-filter searches on Hugging Face (`DEFAULT_QUERIES` — currently `task_ids:sentiment-classification`), tried after the famous list and before the top-downloads sweep.
+- ModelScope mirror discovery upgraded to cross-owner **name search** (exact id / exact short-name suffix only — keyword proximity never counts as attribution), with the fixed-owner probes as fallback.
+- GitHub curated map expanded to 6 canonical repos (voxpopuli, common_voice, tweet_eval, mteb, gsm8k, glue) — each verified to exist before mapping.
+- Seed expanded to 25 assets: **17 multi-source** (6 with three sources) and 7 sentiment-classification datasets.
+- Domain inference hardened: explicit `modality:` tags win over task words ("hate-speech-detection" is a TEXT task and no longer misfires as audio).
+- Test suite grew to 59 tests.
 
 ### 0.1.1 — multi-source adapters
 

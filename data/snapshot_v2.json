@@ -1,6 +1,6 @@
 {
   "version": "2",
-  "generated_at": "2026-09-08T14:36:19.564Z",
+  "generated_at": "2026-09-08T15:41:03.324Z",
   "assets": [
     {
       "asset_id": "stanfordnlp/imdb",
@@ -34,11 +34,11 @@
           "source": "huggingface",
           "metrics": {
             "downloads": {
-              "value": 191564,
+              "value": 197326,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 709,
+              "value": 722,
               "signal_type": "shallow"
             },
             "model_uses": {
@@ -46,28 +46,28 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:35:47.474Z"
+          "fetched_at": "2026-09-08T15:40:28.183Z"
         },
         {
           "source": "modelscope",
           "metrics": {
             "downloads": {
-              "value": 4105,
+              "value": 269,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 16,
+              "value": 0,
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T14:35:50.957Z"
+          "fetched_at": "2026-09-08T15:40:28.482Z"
         }
       ],
       "timeline": [
         {
           "date": "2026-09",
           "metric": "downloads",
-          "value": 191564,
+          "value": 197326,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -118,21 +118,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:35:51.496Z"
+          "fetched_at": "2026-09-08T15:40:29.227Z"
         },
         {
           "source": "modelscope",
           "metrics": {
             "downloads": {
-              "value": 4926,
+              "value": 4935,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 7,
+              "value": 2,
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T14:35:54.399Z"
+          "fetched_at": "2026-09-08T15:40:29.368Z"
         }
       ],
       "timeline": [
@@ -190,21 +190,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:35:55.074Z"
+          "fetched_at": "2026-09-08T15:40:29.764Z"
         },
         {
           "source": "modelscope",
           "metrics": {
             "downloads": {
-              "value": 325,
+              "value": 6907,
               "signal_type": "deep"
             },
             "likes": {
-              "value": 0,
+              "value": 16,
               "signal_type": "shallow"
             }
           },
-          "fetched_at": "2026-09-08T14:35:56.832Z"
+          "fetched_at": "2026-09-08T15:40:29.926Z"
         }
       ],
       "timeline": [
@@ -248,7 +248,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:35:58.131Z"
+          "fetched_at": "2026-09-08T15:40:30.627Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 4433,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:30.746Z"
         },
         {
           "source": "github",
@@ -266,7 +280,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:00.878Z"
+          "fetched_at": "2026-09-08T15:40:32.657Z"
         }
       ],
       "timeline": [
@@ -318,7 +332,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:02.532Z"
+          "fetched_at": "2026-09-08T15:40:33.183Z"
         }
       ],
       "timeline": [
@@ -336,7 +350,7 @@
       "asset_id": "HuggingFaceFW/fineweb",
       "id_type": "hf",
       "name": "fineweb",
-      "domain": "nlp",
+      "domain": "tabular",
       "tags": [
         "task_categories:text-generation",
         "language:en",
@@ -371,7 +385,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:05.575Z"
+          "fetched_at": "2026-09-08T15:40:34.351Z"
         }
       ],
       "timeline": [
@@ -429,7 +443,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:11.242Z"
+          "fetched_at": "2026-09-08T15:40:36.333Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 15504,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 4,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:36.501Z"
         }
       ],
       "timeline": [
@@ -487,7 +515,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:14.191Z"
+          "fetched_at": "2026-09-08T15:40:36.899Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 4609,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:37.039Z"
         },
         {
           "source": "github",
@@ -505,7 +547,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:15.424Z"
+          "fetched_at": "2026-09-08T15:40:37.989Z"
         }
       ],
       "timeline": [
@@ -513,6 +555,550 @@
           "date": "2026-09",
           "metric": "downloads",
           "value": 83609,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "nyu-mll/glue",
+      "id_type": "hf",
+      "name": "glue",
+      "domain": "tabular",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:acceptability-classification",
+        "task_ids:natural-language-inference",
+        "task_ids:semantic-similarity-scoring",
+        "task_ids:sentiment-classification",
+        "task_ids:text-scoring",
+        "annotations_creators:other",
+        "language_creators:other",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:other",
+        "size_categories:1M<n<10M",
+        "format:parquet",
+        "modality:tabular",
+        "modality:text"
+      ],
+      "description": "Dataset Card for GLUE Dataset Summary GLUE, the General Language Understanding Evaluation benchmark (https://gluebenchmark.com/) is a collection of resources for training, evaluating, and analyzing natural language understanding systems. Supported Tasks and Leaderboards The leaderboard for the GLUE benchmark can be found at this address. It comprises the following tasks: ax A manually-curated evaluation dataset for fine-grained… See the full description on the dataset page: https://huggingface.co/datasets/nyu-mll/glue.",
+      "access": "open",
+      "license": "other",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 788648,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 741,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 110,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:38.319Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 2781,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:38.471Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 831,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 178,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 141,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:39.715Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 788648,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "cornell-movie-review-data/rotten_tomatoes",
+      "id_type": "hf",
+      "name": "rotten_tomatoes",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:sentiment-classification",
+        "annotations_creators:crowdsourced",
+        "language_creators:crowdsourced",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:unknown",
+        "size_categories:10K<n<100K",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:mlcroissant",
+        "library:polars",
+        "region:us"
+      ],
+      "description": "Dataset Card for \"rotten_tomatoes\" Dataset Summary Movie Review Dataset. This is a dataset of containing 5,331 positive and 5,331 negative processed sentences from Rotten Tomatoes movie reviews. This data was first used in Bo Pang and Lillian Lee, ``Seeing stars: Exploiting class relationships for sentiment categorization with respect to rating scales.'', Proceedings of the ACL, 2005. Supported Tasks and Leaderboards More Information Needed… See the full description on the dataset page: https://huggingface.co/datasets/cornell-movie-review-data/rotten_tomatoes.",
+      "access": "open",
+      "license": "unknown",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 55203,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 116,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 19,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:40.019Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 55203,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "stanfordnlp/sst2",
+      "id_type": "hf",
+      "name": "sst2",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:sentiment-classification",
+        "annotations_creators:crowdsourced",
+        "language_creators:found",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:unknown",
+        "size_categories:10K<n<100K",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:mlcroissant",
+        "library:polars",
+        "region:us"
+      ],
+      "description": "Dataset Card for [Dataset Name] Dataset Summary The Stanford Sentiment Treebank is a corpus with fully labeled parse trees that allows for a complete analysis of the compositional effects of sentiment in language. The corpus is based on the dataset introduced by Pang and Lee (2005) and consists of 11,855 single sentences extracted from movie reviews. It was parsed with the Stanford parser and includes a total of 215,154 unique phrases from those parse trees, each… See the full description on the dataset page: https://huggingface.co/datasets/stanfordnlp/sst2.",
+      "access": "open",
+      "license": "unknown",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 38755,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 164,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 42,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:41.102Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 527,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:41.248Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 38755,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "mteb/sts14-sts",
+      "id_type": "hf",
+      "name": "sts14-sts",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:sentence-similarity",
+        "task_ids:semantic-similarity-scoring",
+        "task_ids:sentiment-analysis",
+        "task_ids:sentiment-scoring",
+        "task_ids:sentiment-classification",
+        "task_ids:hate-speech-detection",
+        "annotations_creators:derived",
+        "multilinguality:monolingual",
+        "language:eng",
+        "license:unknown",
+        "size_categories:1K<n<10K",
+        "format:json",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:polars"
+      ],
+      "description": "STS14 An MTEB dataset Massive Text Embedding Benchmark SemEval STS 2014 dataset. Currently only the English dataset Task category t2t Domains Blog, Web, Spoken Reference https://www.aclweb.org/anthology/S14-1002 How to evaluate on this task You can evaluate an embedding model on this dataset using the following code: import mteb task = mteb.get_tasks([\"STS14\"]) evaluator = mteb.MTEB(task) model = mteb.get_model(YOUR_MODEL) evaluator.run(model)… See the full description on the dataset page: https://huggingface.co/datasets/mteb/sts14-sts.",
+      "access": "open",
+      "license": "unknown",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 22483,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 2,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:41.643Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 3994,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:41.742Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 3419,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 691,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 4592,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:42.509Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 22483,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "cardiffnlp/tweet_eval",
+      "id_type": "hf",
+      "name": "tweet_eval",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:intent-classification",
+        "task_ids:multi-class-classification",
+        "task_ids:sentiment-classification",
+        "annotations_creators:found",
+        "language_creators:found",
+        "multilinguality:monolingual",
+        "source_datasets:extended|other-tweet-datasets",
+        "language:en",
+        "license:unknown",
+        "size_categories:100K<n<1M",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:mlcroissant"
+      ],
+      "description": "Dataset Card for tweet_eval Dataset Summary TweetEval consists of seven heterogenous tasks in Twitter, all framed as multi-class tweet classification. The tasks include - irony, hate, offensive, stance, emoji, emotion, and sentiment. All tasks have been unified into the same benchmark, with each dataset presented in the same format and with fixed training, validation and test splits. Supported Tasks and Leaderboards text_classification: The dataset… See the full description on the dataset page: https://huggingface.co/datasets/cardiffnlp/tweet_eval.",
+      "access": "open",
+      "license": "unknown",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 20977,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 149,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 83,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:43.197Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 179,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:43.312Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 400,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 84,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 88,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:44.366Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 20977,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "Yelp/yelp_review_full",
+      "id_type": "hf",
+      "name": "yelp_review_full",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:sentiment-classification",
+        "annotations_creators:crowdsourced",
+        "language_creators:crowdsourced",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:other",
+        "size_categories:100K<n<1M",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:mlcroissant",
+        "library:polars",
+        "arxiv:1509.01626"
+      ],
+      "description": "Dataset Card for YelpReviewFull Dataset Summary The Yelp reviews dataset consists of reviews from Yelp. It is extracted from the Yelp Dataset Challenge 2015 data. Supported Tasks and Leaderboards text-classification, sentiment-classification: The dataset is mainly used for text classification: given the text, predict the sentiment. Languages The reviews were mainly written in english. Dataset Structure… See the full description on the dataset page: https://huggingface.co/datasets/Yelp/yelp_review_full.",
+      "access": "open",
+      "license": "other",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 15889,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 148,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 25,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:45.203Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 116,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:45.300Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 15889,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "fancyzhx/amazon_polarity",
+      "id_type": "hf",
+      "name": "amazon_polarity",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-classification",
+        "task_ids:sentiment-classification",
+        "annotations_creators:crowdsourced",
+        "language_creators:crowdsourced",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:apache-2.0",
+        "size_categories:1M<n<10M",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:dask",
+        "library:mlcroissant",
+        "library:polars",
+        "arxiv:1509.01626"
+      ],
+      "description": "Dataset Card for Amazon Review Polarity Dataset Summary The Amazon reviews dataset consists of reviews from amazon. The data span a period of 18 years, including ~35 million reviews up to March 2013. Reviews include product and user information, ratings, and a plaintext review. Supported Tasks and Leaderboards text-classification, sentiment-classification: The dataset is mainly used for text classification: given the content and the title, predict… See the full description on the dataset page: https://huggingface.co/datasets/fancyzhx/amazon_polarity.",
+      "access": "open",
+      "license": "apache-2.0",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 13313,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 51,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 7,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:45.661Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 47,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:45.755Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 13313,
           "source": "huggingface",
           "signal_type": "deep"
         }
@@ -551,7 +1137,7 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:18.306Z"
+          "fetched_at": "2026-09-08T15:40:51.397Z"
         }
       ],
       "timeline": [
@@ -600,7 +1186,21 @@
               "signal_type": "deep"
             }
           },
-          "fetched_at": "2026-09-08T14:36:19.367Z"
+          "fetched_at": "2026-09-08T15:40:52.229Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 2248,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:52.401Z"
         }
       ],
       "timeline": [
@@ -608,6 +1208,476 @@
           "date": "2026-09",
           "metric": "downloads",
           "value": 1974680,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "m-a-p/FineFineWeb",
+      "id_type": "hf",
+      "name": "FineFineWeb",
+      "domain": "tabular",
+      "tags": [
+        "task_categories:text-classification",
+        "task_categories:text-generation",
+        "language:en",
+        "license:apache-2.0",
+        "size_categories:1B<n<10B",
+        "modality:tabular",
+        "modality:text",
+        "region:us"
+      ],
+      "description": "FineFineWeb: A Comprehensive Study on Fine-Grained Domain Web Corpus arXiv: Coming Soon Project Page: Coming Soon Blog: Coming Soon Data Statistics Domain (#tokens/#samples) Iteration 1 Tokens Iteration 2 Tokens Iteration 3 Tokens Total Tokens Iteration 1 Count Iteration 2 Count Iteration 3 Count Total Count aerospace 5.77B 261.63M 309.33M 6.34B 9100000 688505 611034 10399539 agronomy 13.08B 947.41M 229.04M 14.26B 15752828 2711790 649404 19114022… See the full description on the dataset page: https://huggingface.co/datasets/m-a-p/FineFineWeb.",
+      "access": "open",
+      "license": "apache-2.0",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1837605,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 174,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 1,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:53.465Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 66845,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 1,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:53.597Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1837605,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "Salesforce/wikitext",
+      "id_type": "hf",
+      "name": "wikitext",
+      "domain": "nlp",
+      "tags": [
+        "task_categories:text-generation",
+        "task_categories:fill-mask",
+        "task_ids:language-modeling",
+        "task_ids:masked-language-modeling",
+        "annotations_creators:no-annotation",
+        "language_creators:crowdsourced",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:cc-by-sa-3.0",
+        "license:gfdl",
+        "size_categories:1M<n<10M",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:dask"
+      ],
+      "description": "Dataset Card for \"wikitext\" Dataset Summary The WikiText language modeling dataset is a collection of over 100 million tokens extracted from the set of verified Good and Featured articles on Wikipedia. The dataset is available under the Creative Commons Attribution-ShareAlike License. Compared to the preprocessed version of Penn Treebank (PTB), WikiText-2 is over 2 times larger and WikiText-103 is over 110 times larger. The WikiText dataset also features a far… See the full description on the dataset page: https://huggingface.co/datasets/Salesforce/wikitext.",
+      "access": "open",
+      "license": "cc-by-sa-3.0, gfdl",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1594154,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 767,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 147,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:53.909Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 11824,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 2,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:54.056Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1594154,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "banned-historical-archives/banned-historical-archives",
+      "id_type": "hf",
+      "name": "banned-historical-archives",
+      "domain": "vision",
+      "tags": [
+        "size_categories:n<1K",
+        "format:imagefolder",
+        "modality:image",
+        "library:datasets",
+        "library:mlcroissant",
+        "region:us"
+      ],
+      "description": "和谐历史档案馆数据集 - Banned Historical Archives Datasets 和谐历史档案馆数据集包含已录入 https://banned-historical-archives.github.io 和暂未未录入的原始文件。 目录结构 banned-historical-archives.github.io # 已录入该网站的原始数据，不定期从 github 仓库中同步 raw # 原始文件 config # 配置文件 todo # 存放暂未录入网站的文件 部分报纸和图片资料存放在单独的仓库: 名称 地址 状态 参考消息 https://huggingface.co/datasets/banned-historical-archives/ckxx 未录入 人民日报 https://huggingface.co/datasets/banned-historical-archives/rmrb 已精选重要的文章录入 文汇报… See the full description on the dataset page: https://huggingface.co/datasets/banned-historical-archives/banned-historical-archives.",
+      "access": "open",
+      "license": null,
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1577911,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 75,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 1,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:55.559Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1577911,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "ayuo/hd_tmp",
+      "id_type": "hf",
+      "name": "hd_tmp",
+      "domain": "other",
+      "tags": [
+        "region:us"
+      ],
+      "description": "",
+      "access": "open",
+      "license": null,
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1465549,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 34,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:56.040Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1465549,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "xlangai/ubuntu_osworld_file_cache",
+      "id_type": "hf",
+      "name": "ubuntu_osworld_file_cache",
+      "domain": "other",
+      "tags": [
+        "license:apache-2.0",
+        "arxiv:2404.07972",
+        "region:us"
+      ],
+      "description": "OSWorld File Cache This repository serves as a file cache for the OSWorld project, providing reliable and fast access to evaluation files that were previously hosted on Google Drive. Overview OSWorld is a scalable, real computer environment for multimodal agents, supporting task setup, execution-based evaluation, and interactive learning across various operating systems and applications. This cache repository ensures that all evaluation files are consistently… See the full description on the dataset page: https://huggingface.co/datasets/xlangai/ubuntu_osworld_file_cache.",
+      "access": "open",
+      "license": "apache-2.0",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1447343,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 49,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:56.541Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 12309,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 0,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:56.633Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1447343,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "ryanmarten/OpenThoughts-1k-sample",
+      "id_type": "hf",
+      "name": "OpenThoughts-1k-sample",
+      "domain": "nlp",
+      "tags": [
+        "size_categories:1K<n<10K",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:mlcroissant",
+        "library:polars",
+        "arxiv:2506.04178",
+        "region:us"
+      ],
+      "description": "[!NOTE] We have released a paper for OpenThoughts! See our paper here. Open-Thoughts-1k-sample This is a 1k sample of the OpenThoughts-114k dataset. Open synthetic reasoning dataset with high-quality examples covering math, science, code, and puzzles! Inspect the content with rich formatting with Curator Viewer. Available Subsets default subset containing ready-to-train data used to finetune the OpenThinker-7B and OpenThinker-32B models: ds =… See the full description on the dataset page: https://huggingface.co/datasets/ryanmarten/OpenThoughts-1k-sample.",
+      "access": "open",
+      "license": null,
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1306737,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 51,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:56.799Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1306737,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "openai/gsm8k",
+      "id_type": "hf",
+      "name": "gsm8k",
+      "domain": "nlp",
+      "tags": [
+        "benchmark:official",
+        "benchmark:eval-yaml",
+        "task_categories:text-generation",
+        "annotations_creators:crowdsourced",
+        "language_creators:crowdsourced",
+        "multilinguality:monolingual",
+        "source_datasets:original",
+        "language:en",
+        "license:mit",
+        "size_categories:10K<n<100K",
+        "format:parquet",
+        "modality:text",
+        "library:datasets",
+        "library:pandas",
+        "library:polars",
+        "library:mlcroissant"
+      ],
+      "description": "Dataset Card for GSM8K Dataset Summary GSM8K (Grade School Math 8K) is a dataset of 8.5K high quality linguistically diverse grade school math word problems. The dataset was created to support the task of question answering on basic mathematical problems that require multi-step reasoning. These problems take between 2 and 8 steps to solve. Solutions primarily involve performing a sequence of elementary calculations using basic arithmetic operations (+ − ×÷) to… See the full description on the dataset page: https://huggingface.co/datasets/openai/gsm8k.",
+      "access": "open",
+      "license": "mit",
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1240685,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 1597,
+              "signal_type": "shallow"
+            },
+            "model_uses_min": {
+              "value": 500,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:58.016Z"
+        },
+        {
+          "source": "modelscope",
+          "metrics": {
+            "downloads": {
+              "value": 473325,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 24,
+              "signal_type": "shallow"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:58.199Z"
+        },
+        {
+          "source": "github",
+          "metrics": {
+            "stars": {
+              "value": 1449,
+              "signal_type": "shallow"
+            },
+            "forks": {
+              "value": 202,
+              "signal_type": "deep"
+            },
+            "commits": {
+              "value": 5,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:40:59.195Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1240685,
+          "source": "huggingface",
+          "signal_type": "deep"
+        }
+      ],
+      "citations": []
+    },
+    {
+      "asset_id": "k9cli/video-vec2wav2-tokenizer",
+      "id_type": "hf",
+      "name": "video-vec2wav2-tokenizer",
+      "domain": "other",
+      "tags": [
+        "region:us"
+      ],
+      "description": "video-vec2wav2-tokenizer Production-ready pipeline (Python package video_vec2wav2_tokenizer, CLI command video2dataset) that turns a folder of videos into clean AI training datasets for speech recognition (ASR) and text-to-speech (TTS). videos ──► audio (16 kHz mono PCM) ──► whisper transcript ──► clips ──► metadata.csv / dataset.jsonl / tts_metadata.csv / report.json Video processing — recursive scan of mp4 / mkv / avi / mov / webm, FFmpeg audio extraction to mono ·… See the full description on the dataset page: https://huggingface.co/datasets/k9cli/video-vec2wav2-tokenizer.",
+      "access": "open",
+      "license": null,
+      "verification": "public_api",
+      "sources": [
+        {
+          "source": "huggingface",
+          "metrics": {
+            "downloads": {
+              "value": 1143281,
+              "signal_type": "deep"
+            },
+            "likes": {
+              "value": 19,
+              "signal_type": "shallow"
+            },
+            "model_uses": {
+              "value": 0,
+              "signal_type": "deep"
+            }
+          },
+          "fetched_at": "2026-09-08T15:41:02.617Z"
+        }
+      ],
+      "timeline": [
+        {
+          "date": "2026-09",
+          "metric": "downloads",
+          "value": 1143281,
           "source": "huggingface",
           "signal_type": "deep"
         }

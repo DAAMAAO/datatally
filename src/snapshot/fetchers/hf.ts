@@ -22,8 +22,29 @@ const MAX_MODEL_USES_SCAN = 500
 
 /** Top datasets by downloads, open (non-gated) only. */
 export async function fetchHfTop(env: FetchEnv, limit: number): Promise<string[]> {
-  const url = `${env.hfBase}/api/datasets?sort=downloads&direction=-1&limit=${Math.max(1, limit)}`
-  const data = await getJson(env, url)
+  return fetchHfList(env, { sort: 'downloads', direction: '-1', limit: Math.max(1, limit) })
+}
+
+/**
+ * Search datasets by keyword or tag filter (e.g. `task_ids:sentiment-classification`),
+ * sorted by downloads, open (non-gated) only.
+ */
+export async function fetchHfSearch(
+  env: FetchEnv,
+  query: { search: string; limit: number } | { filter: string; limit: number },
+): Promise<string[]> {
+  const params = {
+    sort: 'downloads',
+    direction: '-1',
+    limit: Math.max(1, query.limit),
+  }
+  return fetchHfList(env, 'search' in query ? { ...params, search: query.search } : { ...params, filter: query.filter })
+}
+
+async function fetchHfList(env: FetchEnv, params: Record<string, string | number>): Promise<string[]> {
+  const search = new URLSearchParams()
+  for (const [key, value] of Object.entries(params)) search.set(key, String(value))
+  const data = await getJson(env, `${env.hfBase}/api/datasets?${search.toString()}`)
   if (!Array.isArray(data)) throw new Error(`hf list endpoint returned ${typeof data}, expected an array`)
   const ids: string[] = []
   for (const entry of data) {

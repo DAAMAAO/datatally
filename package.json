@@ -1,6 +1,6 @@
 {
   "name": "datatally",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "DataTally: verifiable public usage profiles of data assets for DeepSeek Harness. search_assets / get_asset_profile / compare_assets. DataTally records; you judge.",
   "type": "module",
   "repository": {

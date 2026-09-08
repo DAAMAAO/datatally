@@ -2,8 +2,9 @@ import { describe, it } from 'node:test'
 import assert from 'node:assert/strict'
 import { findDoi, fetchDataciteCitations } from '../src/snapshot/fetchers/datacite.js'
 import { fetchGithub } from '../src/snapshot/fetchers/github.js'
-import { fetchHfAsset, fetchHfTop } from '../src/snapshot/fetchers/hf.js'
+import { fetchHfAsset, fetchHfSearch, fetchHfTop } from '../src/snapshot/fetchers/hf.js'
 import { fetchModelscopeMirror } from '../src/snapshot/fetchers/modelscope.js'
+import { inferDomain } from '../src/snapshot/fetchers/util.js'
 import type { FetchEnv } from '../src/snapshot/fetchers/util.js'
 
 const json = (data: unknown, status = 200, headers?: Record<string, string>): Response =>
@@ -42,6 +43,24 @@ describe('huggingface adapter', () => {
       { id: 'e/open2' },
     ]))
     assert.deepEqual(await fetchHfTop(env, 10), ['a/open', 'e/open2'])
+  })
+
+  it('searches by keyword and by tag filter, sorted by downloads', async () => {
+    const seenUrls: string[] = []
+    const env = fakeEnv((url) => {
+      seenUrls.push(url)
+      return json([{ id: 'x/one' }, { id: 'y/gated', gated: true }])
+    })
+    const bySearch = await fetchHfSearch(env, { search: 'sentiment', limit: 5 })
+    assert.deepEqual(bySearch, ['x/one'])
+    assert.ok(seenUrls[0]!.includes('search=sentiment'))
+    assert.ok(seenUrls[0]!.includes('sort=downloads'))
+    assert.ok(seenUrls[0]!.includes('direction=-1'))
+    assert.ok(seenUrls[0]!.includes('limit=5'))
+
+    const byFilter = await fetchHfSearch(env, { filter: 'task_ids:sentiment-classification', limit: 8 })
+    assert.deepEqual(byFilter, ['x/one'])
+    assert.ok(seenUrls[1]!.includes('filter=task_ids%3Asentiment-classification'))
   })
 
   it('builds a full asset record with real model-uses count', async () => {
@@ -93,22 +112,80 @@ describe('huggingface adapter', () => {
   })
 })
 
+describe('domain inference', () => {
+  it('prefers the explicit modality tag over task words', () => {
+    // "hate-speech-detection" contains "speech" but is a TEXT task
+    assert.equal(inferDomain([
+      'task_ids:hate-speech-detection',
+      'task_ids:sentiment-classification',
+      'modality:text',
+    ]), 'nlp')
+    assert.equal(inferDomain(['task_ids:automatic-speech-recognition', 'modality:audio']), 'audio')
+    assert.equal(inferDomain(['task_ids:image-classification', 'modality:image']), 'vision')
+  })
+
+  it('falls back to word-boundary task patterns without a modality tag', () => {
+    assert.equal(inferDomain(['task_ids:automatic-speech-recognition']), 'audio')
+    assert.equal(inferDomain(['task_ids:image-classification']), 'vision')
+    assert.equal(inferDomain([]), 'other')
+  })
+})
+
 describe('modelscope adapter', () => {
-  it('probes mirror owners and takes the first open hit', async () => {
+  it('finds an exact-id mirror through cross-owner search', async () => {
     const env = fakeEnv((url) => {
-      if (url.includes('/AI-ModelScope/demo')) return new Response('{}', { status: 404 })
-      if (url.includes('/modelscope/demo')) return json({ data: { downloads: 500, likes: 7, gated: false } })
+      if (url.includes('?search=demo')) {
+        return json({ data: { datasets: [{ id: 'org/demo', downloads: 500, likes: 7 }] } })
+      }
       return new Response('{}', { status: 404 })
     })
-    const mirror = await fetchModelscopeMirror(env, 'demo')
+    const mirror = await fetchModelscopeMirror(env, 'org/demo', 'demo')
     assert.deepEqual(mirror?.metrics.downloads, { value: 500, signal_type: 'deep' })
     assert.deepEqual(mirror?.metrics.likes, { value: 7, signal_type: 'shallow' })
     assert.equal(mirror?.source, 'modelscope')
   })
 
+  it('accepts an exact short-name suffix under another org, never keyword proximity', async () => {
+    const env = fakeEnv((url) => {
+      if (url.includes('?search=demo')) {
+        return json({ data: { datasets: [
+          { id: 'someone/demo-variant', downloads: 9000 },
+          { id: 'mirrororg/demo', downloads: 300, likes: 2 },
+        ] } })
+      }
+      return new Response('{}', { status: 404 })
+    })
+    const mirror = await fetchModelscopeMirror(env, 'org/demo', 'demo')
+    assert.deepEqual(mirror?.metrics.downloads, { value: 300, signal_type: 'deep' })
+    // the higher-download variant does NOT win — its id is not the canonical name
+  })
+
+  it('falls back to fixed-owner probes when search finds nothing usable', async () => {
+    const env = fakeEnv((url) => {
+      if (url.includes('?search=demo')) {
+        return json({ data: { datasets: [{ id: 'unrelated/thing', downloads: 9000 }] } })
+      }
+      if (url.includes('/AI-ModelScope/demo')) return new Response('{}', { status: 404 })
+      if (url.includes('/modelscope/demo')) return json({ data: { downloads: 120, likes: 3 } })
+      return new Response('{}', { status: 404 })
+    })
+    const mirror = await fetchModelscopeMirror(env, 'org/demo', 'demo')
+    assert.deepEqual(mirror?.metrics.downloads, { value: 120, signal_type: 'deep' })
+  })
+
+  it('falls back to fixed-owner probes when search errors', async () => {
+    const env = fakeEnv((url) => {
+      if (url.includes('?search=demo')) return new Response('boom', { status: 500 })
+      if (url.includes('/modelscope/demo')) return json({ data: { downloads: 88 } })
+      return new Response('{}', { status: 404 })
+    })
+    const mirror = await fetchModelscopeMirror(env, 'org/demo', 'demo')
+    assert.deepEqual(mirror?.metrics.downloads, { value: 88, signal_type: 'deep' })
+  })
+
   it('skips gated mirrors and returns null when nothing matches', async () => {
     const env = fakeEnv(() => json({ data: { downloads: 500, gated: true } }))
-    assert.equal(await fetchModelscopeMirror(env, 'demo'), null)
+    assert.equal(await fetchModelscopeMirror(env, 'org/demo', 'demo'), null)
   })
 })
 

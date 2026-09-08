@@ -162,7 +162,7 @@ cordis.patch.yml          # bundle patch (installed) / dev patch (checkout)
 
 ## Data provenance
 
-The seed snapshot carries **real public usage data** for 10 open Hugging Face datasets, aggregated from up to four public sources (fetched 2026-09-08):
+The seed snapshot carries **real public usage data** for **25 open Hugging Face datasets** — the famous list, 7 sentiment-classification datasets (glue, rotten_tomatoes, sst2, …), and the top-downloads sweep — aggregated from up to four public sources (fetched 2026-09-08):
 
 | Source | Signals |
 |--------|---------|

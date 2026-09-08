@@ -50,13 +50,23 @@ export const shortName = (id: string): string => {
 }
 
 export function inferDomain(tags: unknown): string {
-  const list = Array.isArray(tags) ? tags : []
+  const list = (Array.isArray(tags) ? tags : []).filter((tag): tag is string => typeof tag === 'string')
   const joined = list.join(' ').toLowerCase()
-  if (/(audio|speech|asr|tts)/.test(joined)) return 'audio'
-  if (/(image|vision|object-detection|segmentation)/.test(joined)) return 'vision'
-  if (/(text|nlp|language|translation|question-answering|sentiment)/.test(joined)) return 'nlp'
-  if (/(tabular|time-series|finance)/.test(joined)) return 'tabular'
-  if (/(code|programming)/.test(joined)) return 'code'
+  // Explicit modality tags win: they state the asset's form directly, so
+  // task words like "hate-speech-detection" (a TEXT task) cannot misfire.
+  const modality = /modality:([a-z0-9-]+)/.exec(joined)?.[1]
+  if (modality !== undefined) {
+    if (modality.includes('audio')) return 'audio'
+    if (/(image|3d|video|depth)/.test(modality)) return 'vision'
+    if (modality === 'text') return 'nlp'
+    if (modality === 'tabular') return 'tabular'
+    if (modality === 'code') return 'code'
+  }
+  if (/\b(audio|speech|asr|tts)\b/.test(joined)) return 'audio'
+  if (/\b(image|vision|object-detection|segmentation)\b/.test(joined)) return 'vision'
+  if (/\b(text|nlp|language|translation|question-answering|sentiment)\b/.test(joined)) return 'nlp'
+  if (/\b(tabular|time-series|finance)\b/.test(joined)) return 'tabular'
+  if (/\b(code|programming)\b/.test(joined)) return 'code'
   return 'other'
 }
 

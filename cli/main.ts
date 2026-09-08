@@ -19,7 +19,7 @@ import { mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { buildProfile, compareAssets, requireAsset, searchAssets } from '../src/core/query.js'
 import { renderCompareText, renderProfileText, renderSearchText } from '../src/core/render.js'
-import { DEFAULT_FAMOUS, DEFAULT_GITHUB_MAP, refreshSnapshot } from '../src/snapshot/fetchers/pipeline.js'
+import { DEFAULT_FAMOUS, DEFAULT_GITHUB_MAP, DEFAULT_QUERIES, refreshSnapshot } from '../src/snapshot/fetchers/pipeline.js'
 import { createSnapshotLoader } from '../src/snapshot/loader.js'
 
 const USAGE = [
@@ -33,8 +33,8 @@ const USAGE = [
   '',
   'options:',
   '  --domain <domain>   domain filter for search (nlp, vision, audio, ...)',
-  '  --limit <n>         search: max results (default 20); refresh: asset count (default 10)',
-  '  --top <n>           refresh: top-downloads candidates to consider (default 15)',
+  '  --limit <n>         search: max results (default 20); refresh: asset count (default 25)',
+  '  --top <n>           refresh: top-downloads candidates to consider (default 20)',
   '  --snapshot <path>   snapshot file (or env DATATALLY_SNAPSHOT; default ./data/snapshot_v2.json)',
 ].join('\n')
 
@@ -133,9 +133,10 @@ async function main(): Promise<void> {
         githubToken: process.env.DATATALLY_GITHUB_TOKEN,
       }
       const result = await refreshSnapshot(env, {
-        limit: options.limit ?? 10,
-        topCount: options.top ?? 15,
+        limit: options.limit ?? 25,
+        topCount: options.top ?? 20,
         famous: DEFAULT_FAMOUS,
+        queries: DEFAULT_QUERIES,
         githubMap: DEFAULT_GITHUB_MAP,
       })
       const target = resolve(options.snapshot)

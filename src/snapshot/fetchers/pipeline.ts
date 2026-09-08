@@ -1,7 +1,7 @@
 import type { Asset, Citation, Snapshot, SourceMetrics } from '../types.js'
 import { findDoi, fetchDataciteCitations } from './datacite.js'
 import { fetchGithub } from './github.js'
-import { fetchHfAsset, fetchHfTop } from './hf.js'
+import { fetchHfAsset, fetchHfSearch, fetchHfTop } from './hf.js'
 import type { HfAssetRecord } from './hf.js'
 import { fetchModelscopeMirror } from './modelscope.js'
 import type { FetchEnv } from './util.js'
@@ -15,12 +15,17 @@ import type { FetchEnv } from './util.js'
  * assets remain explicitly marked downstream.
  */
 export interface PipelineOptions {
-  /** Final asset count (the seed ships 10). */
+  /** Final asset count (the seed ships 25). */
   limit: number
   /** How many top-downloads candidates to consider beyond the famous list. */
   topCount: number
   /** Recognizable candidate ids tried first (skipped when gated/absent). */
   famous: readonly string[]
+  /**
+   * Extra catalog queries (keyword search or tag filter on Hugging Face),
+   * tried after the famous list and before the top-downloads sweep.
+   */
+  queries: readonly CatalogQuery[]
   /**
    * Curated dataset→repository mapping for GitHub signals. Only entries with
    * an unambiguous canonical source repo belong here — attribution errors
@@ -28,6 +33,8 @@ export interface PipelineOptions {
    */
   githubMap: Readonly<Record<string, string>>
 }
+
+export type CatalogQuery = { search: string; limit: number } | { filter: string; limit: number }
 
 export const DEFAULT_FAMOUS = [
   'stanfordnlp/imdb',
@@ -40,10 +47,18 @@ export const DEFAULT_FAMOUS = [
   'facebook/voxpopuli',
 ] as const
 
+export const DEFAULT_QUERIES: readonly CatalogQuery[] = [
+  { filter: 'task_ids:sentiment-classification', limit: 8 },
+]
+
 /** Repos that ARE the canonical release home of the dataset (auditable, per entry). */
 export const DEFAULT_GITHUB_MAP: Readonly<Record<string, string>> = {
   'facebook/voxpopuli': 'facebookresearch/voxpopuli',
   'mozilla-foundation/common_voice_17_0': 'mozilla/common-voice',
+  'cardiffnlp/tweet_eval': 'cardiffnlp/tweeteval',
+  'mteb/sts14-sts': 'embeddings-benchmark/mteb',
+  'openai/gsm8k': 'openai/grade-school-math',
+  'nyu-mll/glue': 'nyu-mll/GLUE-baselines',
 }
 
 export interface PipelineResult {
@@ -58,11 +73,22 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
   const topIds = await fetchHfTop(env, Math.max(options.topCount, options.limit))
   const candidates: string[] = []
   const seen = new Set<string>()
-  for (const id of [...options.famous, ...topIds]) {
-    if (seen.has(id)) continue
+  const addCandidate = (id: string): void => {
+    if (seen.has(id)) return
     seen.add(id)
     candidates.push(id)
   }
+  for (const id of options.famous) addCandidate(id)
+  for (const query of options.queries) {
+    let ids: string[]
+    try {
+      ids = await fetchHfSearch(env, query)
+    } catch {
+      continue // a failed catalog query shrinks candidates, never the record's honesty
+    }
+    for (const id of ids) addCandidate(id)
+  }
+  for (const id of topIds) addCandidate(id)
 
   const assets: Asset[] = []
   const raw: HfAssetRecord[] = []
@@ -75,7 +101,7 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
     const sources: SourceMetrics[] = [...record.sources]
     const merged: string[] = ['huggingface']
 
-    const mirror = await fetchModelscopeMirror(env, record.name)
+    const mirror = await fetchModelscopeMirror(env, record.asset_id, record.name)
     if (mirror !== null) {
       sources.push(mirror)
       merged.push('modelscope')

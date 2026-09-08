@@ -59,6 +59,7 @@ const options = {
   limit: 10,
   topCount: 15,
   famous: ['f1'],
+  queries: [] as readonly never[],
   githubMap: { f1: 'org/f1repo' },
 }
 
@@ -99,5 +100,40 @@ describe('refresh pipeline', () => {
   it('caps the asset count at the configured limit', async () => {
     const result = await refreshSnapshot(scriptedEnv(), { ...options, limit: 2 })
     assert.equal(result.snapshot.assets.length, 2)
+  })
+
+  it('injects catalog queries after the famous list and dedupes them', async () => {
+    const env = scriptedEnv()
+    const originalFetch = env.fetchFn
+    env.fetchFn = (async (input: string | URL | Request) => {
+      const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url
+      if (url.includes('filter=task_ids%3Asentiment-classification')) {
+        return json([{ id: 'q1' }, { id: 'f1' }])
+      }
+      if (url.endsWith('/api/datasets/q1')) return json(hfDetail('q1'))
+      return originalFetch(input)
+    }) as typeof fetch
+    const result = await refreshSnapshot(env, {
+      ...options,
+      queries: [{ filter: 'task_ids:sentiment-classification', limit: 2 }],
+    })
+    const ids = result.snapshot.assets.map((asset) => asset.asset_id)
+    assert.deepEqual(ids, ['f1', 'q1', 't1', 't3'])
+  })
+
+  it('tolerates a failing catalog query without losing the record', async () => {
+    const env = scriptedEnv()
+    const originalFetch = env.fetchFn
+    env.fetchFn = (async (input: string | URL | Request) => {
+      const url = typeof input === 'string' ? input : input instanceof URL ? input.toString() : input.url
+      if (url.includes('filter=task_ids')) return new Response('boom', { status: 500 })
+      return originalFetch(input)
+    }) as typeof fetch
+    const result = await refreshSnapshot(env, {
+      ...options,
+      queries: [{ filter: 'task_ids:whatever', limit: 2 }],
+    })
+    const ids = result.snapshot.assets.map((asset) => asset.asset_id)
+    assert.deepEqual(ids, ['f1', 't1', 't3'])
   })
 })
