@@ -150,14 +150,10 @@ datatally search sentiment --domain nlp --limit 5
 datatally compare HuggingFaceFW/fineweb allenai/c4
 datatally export nyu-mll/glue      # AI-BOM fact entry: pure facts, no conclusions
 datatally catalog                  # per-sector distributions (multi-source rate, model-use density)
-datatally refresh                  # re-fetch the four public sources into a new snapshot
-datatally refresh --query protein  # domain-focused catalog: any keyword, no code change
-datatally refresh --filter task_ids:sentiment-classification --limit 30
-datatally refresh --query CBAM --block yolov8n --block checkpoints   # P0 candidate filter
 # snapshot location: --snapshot <path> or DATATALLY_SNAPSHOT env
 ```
 
-`--query <text>` / `--filter <tag>` are repeatable and replace the shipped default queries; when given, the queried candidates lead the catalog. `--block <word>` / `--allow <word>` (repeatable) reject discovered candidates whose id carries the exact token; every rejection is logged with the rule and the triggering word. `refresh` reads `data/curated.json` next to the snapshot when present (`--no-curation` to skip).
+The CLI is **read-side only**: every command reads a snapshot file. Rebuilding a snapshot (the four-source refresh pipeline) is a maintainer operation in the private workspace; the pipeline never ships in this package or the public repository.
 
 ---
 
@@ -169,16 +165,17 @@ src/
 ├── core/                 # pure query logic (no harness deps) + text rendering
 ├── tools/                # one defineTool per file: schema + execute + render + UI cards
 ├── snapshot/             # loader (strict validation, fail-loud), types, AssetId brand
-│   └── fetchers/         # four-source refresh pipeline (HF/ModelScope/DataCite/GitHub)
 ├── schema/               # strict snapshot validator
-cli/main.ts               # CLI (same core + refresh)
-test/                     # 51 tests: unit + fetchers + pipeline + keyless drive + goldens
-data/snapshot_v2.json     # seed snapshot (10 real HF datasets, multi-source)
+cli/main.ts               # read-side CLI (profile/search/compare/export/catalog)
+test/                     # read-side tests: 42 unit + keyless drive + goldens
+data/snapshot_v2.json     # seed snapshot (126 real datasets, 9 sectors)
 cordis.patch.yml          # bundle patch (installed) / dev patch (checkout)
 ```
 
+The maintainer's local checkout additionally holds the **private refresh pipeline** (`src/snapshot/fetchers/` and its tests): excluded from this repository by `.gitignore` plus a hard deny-gate in the push script, and never present in npm tarballs (the `files` allowlist has no matching glob).
+
 - `npm run typecheck` — strict TypeScript, no errors
-- `npm test` — builds, then runs 34 tests including keyless drive tests through the real `ctx.tools.execute` pipeline
+- `npm test` — builds, then runs the read-side suite (42 tests) including keyless drive tests through the real `ctx.tools.execute` pipeline
 - Peer packages (`@deepseek-ai/cordis`, `dsh-tools`, `dsh-llm`) are provided by the DeepSeek Harness deployment, exactly like the official dsh tool plugins.
 
 ---
@@ -194,18 +191,11 @@ The seed snapshot carries **real public usage data** for **126 open Hugging Face
 | DataCite | citation counts (when the dataset card carries a DOI) |
 | GitHub | stars (shallow), forks/commits (deep) — only for curated dataset→repo mappings whose repo is the dataset's canonical release home (see `data/curated.json`) |
 
-Provenance discipline: every metric carries its `source` + `fetched_at`; `model_uses` is exact below the scan cap and recorded as `model_uses_min` (an honest lower bound) at the cap; single-source assets are marked explicitly ("single source only — multi-source aggregation not met"); missing provenance is never fabricated. Hugging Face numbers were fetched through the hf-mirror.com mirror (counts are the mirror's index, which can differ from hf.co's counters); set `DATATALLY_HF_BASE` to refresh from a different channel.
+Provenance discipline: every metric carries its `source` + `fetched_at`; `model_uses` is exact below the scan cap and recorded as `model_uses_min` (an honest lower bound) at the cap; single-source assets are marked explicitly ("single source only — multi-source aggregation not met"); missing provenance is never fabricated. Hugging Face numbers were fetched through the hf-mirror.com mirror (counts are the mirror's index, which can differ from hf.co's counters); the maintainer-private refresh reads `DATATALLY_HF_BASE` (default https://huggingface.co) to switch channels.
 
 **On calibers, stated neutrally**: a platform's own statistics are one caliber among several. Each caliber is recorded separately with its source and fetch time, and a profile that aggregates several calibers is more complete than one that does not — no platform's statistics are attacked or preferred; the record simply states what each caliber shows.
 
-Refresh the seed yourself (four-source pipeline, same core as the plugin):
-
-```bash
-datatally refresh --snapshot ./data/snapshot_v2.json
-# env: DATATALLY_HF_BASE (default https://huggingface.co),
-#      DATATALLY_MODELSCOPE_BASE (default https://modelscope.cn),
-#      DATATALLY_GITHUB_TOKEN (optional, raises the GitHub rate limit)
-```
+The seed snapshot is produced by the maintainer's **private four-source refresh pipeline**. The public package and repository are read-side only: they ship and read snapshots, they never fetch. To get a fresh snapshot, ask the maintainer to run the private pipeline and ship the updated `data/snapshot_v2.json`.
 
 ---
 

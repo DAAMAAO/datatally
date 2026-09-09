@@ -1,8 +1,17 @@
 # DataTally — Publishing & Release Notes
 
-**Date**: 2026-09-08 · **Current version**: 0.1.4 (0.1.0–0.1.3 published; 0.1.4 tarball built, publish pending re-login)
+**Date**: 2026-09-09 · **Current version**: 0.1.5 published (npm live)
 
 ## Changelog
+
+### 0.1.5 — read-side hardening (security-review follow-up)
+
+- A security review of v0.1.4 (2026-09-09) found the confidential refresh layer (`src/snapshot/fetchers/`, raw API dumps, pipeline-bound tests) had been pushed to the public GitHub repository since v0.1.1, and had shipped compiled inside npm packages 0.1.1–0.1.4.
+- Stop-loss commit `dff8b027` removed those paths from GitHub main (history retains copies — deletion is stop-loss, not remediation).
+- 0.1.5 splits the surfaces structurally: the public package and repository are **read-side only**. `datatally refresh` is removed from the public CLI; the four-source pipeline is a maintainer-private asset (kept in the local checkout, run through a private entry in the maintainer workspace).
+- Enforcement is structural, not procedural: the npm `files` allowlist has no glob matching the pipeline's compiled output, and the push script carries a hard deny-gate (confidential paths abort the push before any blob upload).
+- npm tarballs no longer contain compiled fetchers (0.1.1–0.1.4 did; those copies are irreversible, assessed low-medium value).
+- Read-side test suite: 42 tests (maintainer suite keeps the full 74 locally).
 
 ### 0.1.4 — read-side release (DevPlan V0.1.4 P0–P4 + catalog expansion)
 

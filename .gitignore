@@ -3,3 +3,10 @@ lib/
 *.tgz
 *.log
 .DS_Store
+
+# 保密层 2.1 — never enter the public repo (see gh-push-datatally.mjs FORBIDDEN)
+src/snapshot/fetchers/
+data/raw_dump.json
+test/fetchers.test.ts
+test/filter.test.ts
+test/pipeline.test.ts

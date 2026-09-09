@@ -1,6 +1,6 @@
 {
   "name": "datatally",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "DataTally: verifiable public usage profiles of data assets for DeepSeek Harness. search_assets / get_asset_profile / compare_assets. DataTally records; you judge.",
   "type": "module",
   "repository": {
@@ -25,9 +25,18 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "lib/src/**/*.js",
-    "lib/src/**/*.d.ts",
+    "lib/src/index.js",
+    "lib/src/index.d.ts",
+    "lib/src/core/**/*.js",
+    "lib/src/core/**/*.d.ts",
+    "lib/src/schema/**/*.js",
+    "lib/src/schema/**/*.d.ts",
+    "lib/src/snapshot/*.js",
+    "lib/src/snapshot/*.d.ts",
+    "lib/src/tools/**/*.js",
+    "lib/src/tools/**/*.d.ts",
     "lib/cli/**/*.js",
+    "lib/cli/**/*.d.ts",
     "data/snapshot_v2.json",
     "data/curated.json",
     "cordis.patch.yml",
