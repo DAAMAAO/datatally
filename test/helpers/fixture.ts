@@ -12,6 +12,7 @@ export const fixtureSnapshot: Snapshot = {
       domain: 'nlp',
       tags: ['task_ids:sentiment-classification', 'modality:text', 'language:en'],
       description: 'Large Movie Review Dataset for binary sentiment classification of movie reviews.',
+      sector: 'film-industry',
       access: 'open',
       license: null,
       verification: 'public_api',
@@ -69,6 +70,7 @@ export const fixtureSnapshot: Snapshot = {
           metrics: {
             downloads: { value: 1000, signal_type: 'deep' },
             likes: { value: 50, signal_type: 'shallow' },
+            model_uses: { value: 3, signal_type: 'deep' },
           },
           fetched_at: '2026-09-05T12:00:00Z',
         },

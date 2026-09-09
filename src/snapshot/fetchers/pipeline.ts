@@ -1,4 +1,6 @@
 import type { Asset, Citation, Snapshot, SourceMetrics } from '../types.js'
+import { githubRepoFromUrl, loadCurationFile } from './curation.js'
+import type { CuratedEntry } from './curation.js'
 import { findDoi, fetchDataciteCitations } from './datacite.js'
 import { fetchGithub } from './github.js'
 import { fetchHfAsset, fetchHfSearch, fetchHfTop } from './hf.js'
@@ -30,11 +32,29 @@ export interface PipelineOptions {
   /** Try the catalog queries before the famous list. */
   queriesFirst?: boolean
   /**
+   * P0 candidate filter: exact-token blocklist. A discovered candidate whose
+   * id contains a blocklisted token is rejected BEFORE any fetch; the block
+   * is logged with the rule and the triggering word. The famous list is
+   * curator-intent and is never filtered.
+   */
+  block?: readonly string[]
+  /**
+   * P0 candidate filter: token allowlist. When non-empty, a discovered
+   * candidate must contain at least one allowlisted token to pass.
+   */
+  allow?: readonly string[]
+  /**
    * Curated dataset→repository mapping for GitHub signals. Only entries with
    * an unambiguous canonical source repo belong here — attribution errors
    * would fabricate usage records.
    */
   githubMap: Readonly<Record<string, string>>
+  /**
+   * P2: path to a curated.json data file. When provided, github-provider
+   * entries augment `githubMap`; the loaded file is returned in the result.
+   * A missing or malformed file fails loud.
+   */
+  curationPath?: string
 }
 
 export type CatalogQuery = { search: string; limit: number } | { filter: string; limit: number }
@@ -64,22 +84,81 @@ export const DEFAULT_GITHUB_MAP: Readonly<Record<string, string>> = {
   'nyu-mll/glue': 'nyu-mll/GLUE-baselines',
 }
 
+/** One filtered-out candidate, with the rule and word that triggered it. */
+export interface BlockedCandidate {
+  asset_id: string
+  /** 'block' (hit a blocklist token) or 'allow' (failed the allowlist). */
+  rule: 'block' | 'allow'
+  word: string
+}
+
 export interface PipelineResult {
   snapshot: Snapshot
   /** Raw adapter records for auditing (same order as snapshot.assets). */
   raw: HfAssetRecord[]
   /** Per-asset log lines, one per merged source. */
   log: string[]
+  /** P0 audit: every blocked candidate with its rule and triggering word. */
+  blocked: BlockedCandidate[]
+  /** P2 audit: the loaded curation file entries (empty when no file). */
+  curation: CuratedEntry[]
+}
+
+/** Pure filter: exact-token rules over the candidate id. Exportable for tests. */
+export function filterCandidate(
+  assetId: string,
+  block: readonly string[] | undefined,
+  allow: readonly string[] | undefined,
+): { pass: true } | { pass: false; rule: 'block' | 'allow'; word: string } {
+  const tokens = assetId.toLowerCase().split(/[-_/.]+/)
+  if (block !== undefined) {
+    for (const token of tokens) {
+      if (block.includes(token)) return { pass: false, rule: 'block', word: token }
+    }
+  }
+  if (allow !== undefined && allow.length > 0) {
+    for (const token of tokens) {
+      if (allow.includes(token)) return { pass: true }
+    }
+    return { pass: false, rule: 'allow', word: assetId }
+  }
+  return { pass: true }
 }
 
 export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): Promise<PipelineResult> {
+  // P2: load the curation file when configured (loud on missing/malformed).
+  let curation: CuratedEntry[] = []
+  let githubMap: Readonly<Record<string, string>> = options.githubMap
+  if (options.curationPath !== undefined) {
+    const file = await loadCurationFile(options.curationPath)
+    curation = file.entries
+    const merged: Record<string, string> = { ...options.githubMap }
+    for (const entry of file.entries) {
+      if (entry.provider !== 'github') continue
+      const repo = githubRepoFromUrl(entry.url)
+      if (repo !== null) merged[entry.asset_id] = repo
+    }
+    githubMap = merged
+  }
+
   const topIds = await fetchHfTop(env, Math.max(options.topCount, options.limit))
   const candidates: string[] = []
+  const blocked: BlockedCandidate[] = []
+  const log: string[] = []
   const seen = new Set<string>()
   const addCandidate = (id: string): void => {
     if (seen.has(id)) return
     seen.add(id)
     candidates.push(id)
+  }
+  const addDiscovered = (id: string): void => {
+    const verdict = filterCandidate(id, options.block, options.allow)
+    if (verdict.pass) {
+      addCandidate(id)
+      return
+    }
+    blocked.push({ asset_id: id, rule: verdict.rule, word: verdict.word })
+    log.push(`BLOCK ${id} :: rule=${verdict.rule} word=${JSON.stringify(verdict.word)}`)
   }
   const addQueries = async (): Promise<void> => {
     for (const query of options.queries) {
@@ -89,7 +168,7 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
       } catch {
         continue // a failed catalog query shrinks candidates, never the record's honesty
       }
-      for (const id of ids) addCandidate(id)
+      for (const id of ids) addDiscovered(id)
     }
   }
   if (options.queriesFirst === true) {
@@ -99,11 +178,10 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
     for (const id of options.famous) addCandidate(id)
     await addQueries()
   }
-  for (const id of topIds) addCandidate(id)
+  for (const id of topIds) addDiscovered(id)
 
   const assets: Asset[] = []
   const raw: HfAssetRecord[] = []
-  const log: string[] = []
 
   for (const candidate of candidates) {
     const record = await fetchHfAsset(env, candidate)
@@ -127,7 +205,7 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
       }
     }
 
-    const repo = options.githubMap[record.asset_id]
+    const repo = githubMap[record.asset_id]
     if (repo !== undefined) {
       const github = await fetchGithub(env, repo)
       if (github !== null) {
@@ -162,9 +240,12 @@ export async function refreshSnapshot(env: FetchEnv, options: PipelineOptions): 
     if (assets.length >= options.limit) break
   }
 
+  if (curation.length > 0) log.push(`curation: ${curation.length} entries loaded`)
   return {
     snapshot: { version: '2', generated_at: new Date().toISOString(), assets },
     raw,
     log,
+    blocked,
+    curation,
   }
 }

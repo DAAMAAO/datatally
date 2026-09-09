@@ -43,6 +43,8 @@ export interface Asset {
   tags?: string[]
   /** Real platform description, truncated by the fetcher; optional. */
   description?: string
+  /** Industry sector label assigned by the catalog curator (e.g. 'aviation'); optional. */
+  sector?: string
   access: Access
   /** Platform license metadata; `null` when unknown — never a fabricated default. */
   license: string | null

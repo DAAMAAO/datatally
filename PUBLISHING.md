@@ -1,8 +1,18 @@
 # DataTally — Publishing & Release Notes
 
-**Date**: 2026-09-08 · **Current version**: 0.1.3 (0.1.0–0.1.2 published; 0.1.3 tarball built, publish pending re-login)
+**Date**: 2026-09-08 · **Current version**: 0.1.4 (0.1.0–0.1.3 published; 0.1.4 tarball built, publish pending re-login)
 
 ## Changelog
+
+### 0.1.4 — read-side release (DevPlan V0.1.4 P0–P4 + catalog expansion)
+
+- **P0 candidate filter layer**: `--block <word>` / `--allow <word>` on refresh; discovered candidates whose id carries an exact blocklisted token are rejected before any fetch, and every rejection is logged with the rule and the triggering word (`blocked` array in the pipeline result). Famous-list entries are never filtered (curator intent).
+- **P1 Fact Profile Export**: `datatally export <asset_id>` emits an AI-BOM-style fact entry (`datatally.fact-export.v1`): license, per-source usage metrics, timeline, citations, generated_at, snapshot version. Pure facts — no compliance conclusions, no risk ratings, no training-suitability judgments. Missing licenses export as `null`; single-source assets carry the factual marker.
+- **P2 Curation map as data**: hardcoded GitHub map replaced by `data/curated.json` (dataset id + official URL + authority annotation, validated on load, loud failure when missing/malformed). Refresh reads the file next to the snapshot; `github` entries feed the usage fetches, other providers are references.
+- **P3 Completeness wording**: exports carry a multi-source completeness section (source count, per-source calibers per signal layer, fetched_at span); README states the caliber position neutrally (one caliber among several; aggregation is more complete — no platform attacked).
+- **P4 Catalog summary**: `datatally catalog` prints per-sector distributions — asset counts, multi-source rates, model-use density (assets with records, exact totals, capped lower bounds) — with no interpretation layer.
+- Catalog expansion (unreleased earlier work folded in): **126 assets across 9 industry sectors**, optional searchable `sector` field, 25 multi-source assets.
+- 74 tests.
 
 ### 0.1.3 — generic catalog queries
 

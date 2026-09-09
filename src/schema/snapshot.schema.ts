@@ -34,7 +34,7 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 
 const SNAPSHOT_KEYS = new Set(['version', 'generated_at', 'assets'])
 const ASSET_KEYS = new Set([
-  'asset_id', 'id_type', 'name', 'domain', 'tags', 'description',
+  'asset_id', 'id_type', 'name', 'domain', 'tags', 'description', 'sector',
   'access', 'license', 'verification', 'sources', 'timeline', 'citations',
 ])
 const SOURCE_KEYS = new Set(['source', 'metrics', 'fetched_at'])
@@ -132,6 +132,10 @@ function validateAsset(value: unknown, index: number): Asset {
   if (description !== undefined) {
     assert(typeof description === 'string', `${what}.description must be a string`)
   }
+  const sector = value.sector
+  if (sector !== undefined) {
+    assert(typeof sector === 'string' && sector.length > 0, `${what}.sector must be a non-empty string`)
+  }
   const sourcesRaw = value.sources
   assert(Array.isArray(sourcesRaw), `${what}.sources must be an array`)
   const timelineRaw = value.timeline
@@ -145,6 +149,7 @@ function validateAsset(value: unknown, index: number): Asset {
     domain: requireString(value, 'domain', what),
     ...(tags === undefined ? {} : { tags: tags as string[] }),
     ...(description === undefined ? {} : { description: description as string }),
+    ...(sector === undefined ? {} : { sector: sector as string }),
     access: requireOneOf(value, 'access', ACCESS_VALUES, what),
     license: license as string | null,
     verification: requireOneOf(value, 'verification', VERIFICATION_VALUES, what),

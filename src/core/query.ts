@@ -65,7 +65,7 @@ export function normText(value: string | undefined): string {
 export function matchesQuery(asset: Asset, query: string, domain?: string): boolean {
   const q = normText(query)
   const tagsText = Array.isArray(asset.tags) ? asset.tags.join(' ') : ''
-  const hay = [asset.name, asset.asset_id, asset.domain, tagsText, asset.description]
+  const hay = [asset.name, asset.asset_id, asset.domain, asset.sector, tagsText, asset.description]
     .map((part) => normText(part))
     .join(' ')
   const queryOk = q === '' || hay.includes(q)

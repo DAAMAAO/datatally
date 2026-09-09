@@ -64,4 +64,13 @@ describe('search core', () => {
     assert.equal(matchesQuery(imdb, 'zzz'), false)
     assert.equal(matchesQuery(imdb, ''), true)
   })
+
+  it('matches the curated sector label', () => {
+    const imdb = fixtureSnapshot.assets[0]
+    assert.ok(imdb !== undefined)
+    if (imdb === undefined) return
+    assert.equal(matchesQuery(imdb, 'film industry'), true)
+    const hits = searchAssets(fixtureSnapshot, 'film-industry', undefined, undefined, 20)
+    assert.deepEqual(hits.map((hit) => hit.asset_id), ['stanfordnlp/imdb'])
+  })
 })

@@ -112,6 +112,24 @@ describe('snapshot loader', () => {
     })
   })
 
+  it('accepts the optional sector field and rejects malformed values', async () => {
+    await withDir(async (dir) => {
+      const path = join(dir, 'snapshot.json')
+      writeFileSync(path, JSON.stringify({
+        ...fixtureSnapshot,
+        assets: [{ ...fixtureSnapshot.assets[0], sector: 'aviation' }],
+      }))
+      const snapshot = await createSnapshotLoader(path).load()
+      assert.equal(snapshot.assets[0]?.sector, 'aviation')
+      const badPath = join(dir, 'bad.json')
+      writeFileSync(badPath, JSON.stringify({
+        ...fixtureSnapshot,
+        assets: [{ ...fixtureSnapshot.assets[0], sector: 123 }],
+      }))
+      await assert.rejects(createSnapshotLoader(badPath).load(), /sector must be a non-empty string/)
+    })
+  })
+
   it('honors an aborted signal', async () => {
     await withDir(async (dir) => {
       const path = join(dir, 'snapshot.json')

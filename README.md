@@ -148,13 +148,16 @@ The same core, in a terminal (the thin-wrapper form over the plugin core):
 datatally profile stanfordnlp/imdb
 datatally search sentiment --domain nlp --limit 5
 datatally compare HuggingFaceFW/fineweb allenai/c4
-datatally refresh                        # re-fetch the four public sources into a new snapshot
-datatally refresh --query protein        # domain-focused catalog: any keyword, no code change
+datatally export nyu-mll/glue      # AI-BOM fact entry: pure facts, no conclusions
+datatally catalog                  # per-sector distributions (multi-source rate, model-use density)
+datatally refresh                  # re-fetch the four public sources into a new snapshot
+datatally refresh --query protein  # domain-focused catalog: any keyword, no code change
 datatally refresh --filter task_ids:sentiment-classification --limit 30
+datatally refresh --query CBAM --block yolov8n --block checkpoints   # P0 candidate filter
 # snapshot location: --snapshot <path> or DATATALLY_SNAPSHOT env
 ```
 
-`--query <text>` / `--filter <tag>` are repeatable and replace the shipped default queries; when given, the queried candidates lead the catalog.
+`--query <text>` / `--filter <tag>` are repeatable and replace the shipped default queries; when given, the queried candidates lead the catalog. `--block <word>` / `--allow <word>` (repeatable) reject discovered candidates whose id carries the exact token; every rejection is logged with the rule and the triggering word. `refresh` reads `data/curated.json` next to the snapshot when present (`--no-curation` to skip).
 
 ---
 
@@ -182,16 +185,18 @@ cordis.patch.yml          # bundle patch (installed) / dev patch (checkout)
 
 ## Data provenance
 
-The seed snapshot carries **real public usage data** for **25 open Hugging Face datasets** — the famous list, 7 sentiment-classification datasets (glue, rotten_tomatoes, sst2, …), and the top-downloads sweep — aggregated from up to four public sources (fetched 2026-09-08):
+The seed snapshot carries **real public usage data** for **126 open Hugging Face datasets across 9 industry sectors** — core (famous benchmarks + sentiment classics), protein, agri-commodity, auto-sales, aviation, insurance-weather, carbon, power, and logistics — aggregated from up to four public sources (fetched 2026-09-08). Each asset carries an optional `sector` label, searchable like any other field:
 
 | Source | Signals |
 |--------|---------|
 | Hugging Face Hub | downloads, likes, model uses (deep / shallow / deep) |
 | ModelScope | downloads, likes (mirrored datasets, probed by short name) |
 | DataCite | citation counts (when the dataset card carries a DOI) |
-| GitHub | stars (shallow), forks/commits (deep) — only for **curated** dataset→repo mappings whose repo is the dataset's canonical release home (see `DEFAULT_GITHUB_MAP` in `src/snapshot/fetchers/pipeline.ts`) |
+| GitHub | stars (shallow), forks/commits (deep) — only for curated dataset→repo mappings whose repo is the dataset's canonical release home (see `data/curated.json`) |
 
 Provenance discipline: every metric carries its `source` + `fetched_at`; `model_uses` is exact below the scan cap and recorded as `model_uses_min` (an honest lower bound) at the cap; single-source assets are marked explicitly ("single source only — multi-source aggregation not met"); missing provenance is never fabricated. Hugging Face numbers were fetched through the hf-mirror.com mirror (counts are the mirror's index, which can differ from hf.co's counters); set `DATATALLY_HF_BASE` to refresh from a different channel.
+
+**On calibers, stated neutrally**: a platform's own statistics are one caliber among several. Each caliber is recorded separately with its source and fetch time, and a profile that aggregates several calibers is more complete than one that does not — no platform's statistics are attacked or preferred; the record simply states what each caliber shows.
 
 Refresh the seed yourself (four-source pipeline, same core as the plugin):
 

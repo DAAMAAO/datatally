@@ -5,7 +5,9 @@
  *   datatally profile <asset_id>
  *   datatally search <query> [--domain <domain>] [--limit <n>]
  *   datatally compare <asset_id_a> <asset_id_b>
- *   datatally refresh [--limit <n>] [--snapshot <path>]
+ *   datatally export <asset_id>     AI-BOM fact entry (pure facts, no conclusions)
+ *   datatally catalog               per-sector distributions (counts/rates/density)
+ *   datatally refresh [options]     fetch all four public sources and write a new snapshot
  *
  * Snapshot location: --snapshot <path> or the DATATALLY_SNAPSHOT env var;
  * defaults to ./data/snapshot_v2.json.
@@ -15,8 +17,10 @@
  * (default https://modelscope.cn), DATATALLY_GITHUB_TOKEN (optional, raises the
  * GitHub rate limit).
  */
-import { mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
+import { catalogSummary, renderCatalogText } from '../src/core/catalog.js'
+import { buildFactExport } from '../src/core/export.js'
 import { buildProfile, compareAssets, requireAsset, searchAssets } from '../src/core/query.js'
 import { renderCompareText, renderProfileText, renderSearchText } from '../src/core/render.js'
 import { DEFAULT_FAMOUS, DEFAULT_GITHUB_MAP, DEFAULT_QUERIES, refreshSnapshot } from '../src/snapshot/fetchers/pipeline.js'
@@ -29,6 +33,8 @@ const USAGE = [
   '  profile <asset_id>              full usage profile of one asset',
   '  search <query>                 search assets by keyword',
   '  compare <asset_id_a> <asset_id_b>  compare two assets (same signal layer)',
+  '  export <asset_id>              AI-BOM fact entry: pure facts, no conclusions',
+  '  catalog                        per-sector distributions (multi-source rate, model-use density)',
   '  refresh                        fetch all four public sources and write a new snapshot',
   '',
   'options:',
@@ -37,6 +43,9 @@ const USAGE = [
   '  --top <n>           refresh: top-downloads candidates to consider (default 20)',
   '  --query <text>      refresh: keyword search on HF (repeatable; replaces the default queries)',
   '  --filter <tag>      refresh: tag filter on HF, e.g. task_ids:sentiment-classification (repeatable)',
+  '  --block <word>      refresh: reject discovered candidates whose id contains this exact token (repeatable)',
+  '  --allow <word>      refresh: when given, discovered candidates must contain an allowlisted token',
+  '  --no-curation       refresh: do not load ./data/curated.json',
   '  --snapshot <path>   snapshot file (or env DATATALLY_SNAPSHOT; default ./data/snapshot_v2.json)',
 ].join('\n')
 
@@ -51,14 +60,24 @@ interface CliOptions {
   limit?: number
   top?: number
   queries: CatalogCliQuery[]
+  block: string[]
+  allow: string[]
+  noCuration: boolean
 }
 
 function parseArgs(argv: string[]): { command: string; rest: string[]; options: CliOptions } {
-  const options: CliOptions = { snapshot: process.env.DATATALLY_SNAPSHOT ?? './data/snapshot_v2.json', queries: [] }
+  const options: CliOptions = {
+    snapshot: process.env.DATATALLY_SNAPSHOT ?? './data/snapshot_v2.json',
+    queries: [],
+    block: [],
+    allow: [],
+    noCuration: false,
+  }
   const positional: string[] = []
   for (let index = 0; index < argv.length; index += 1) {
     const token = argv[index]!
-    if (token === '--domain' || token === '--limit' || token === '--snapshot' || token === '--top' || token === '--query' || token === '--filter') {
+    if (token === '--domain' || token === '--limit' || token === '--snapshot' || token === '--top'
+      || token === '--query' || token === '--filter' || token === '--block' || token === '--allow') {
       const value = argv[index + 1]
       if (value === undefined) {
         console.error(`datatally: option ${token} needs a value`)
@@ -84,7 +103,11 @@ function parseArgs(argv: string[]): { command: string; rest: string[]; options: 
       }
       if (token === '--query') options.queries.push({ kind: 'search', value })
       if (token === '--filter') options.queries.push({ kind: 'filter', value })
+      if (token === '--block') options.block.push(value)
+      if (token === '--allow') options.allow.push(value)
       if (token === '--snapshot') options.snapshot = value
+    } else if (token === '--no-curation') {
+      options.noCuration = true
     } else if (token.startsWith('--')) {
       console.error(`datatally: unknown option ${token}\n\n${USAGE}`)
       process.exit(2)
@@ -137,6 +160,22 @@ async function main(): Promise<void> {
       console.log(renderCompareText(comparison))
       return
     }
+    if (command === 'export') {
+      const snapshot = await loader.load()
+      const assetId = rest[0]
+      if (assetId === undefined) {
+        console.error('datatally: export needs an asset_id\n\n' + USAGE)
+        process.exit(2)
+      }
+      const exportEntry = buildFactExport(snapshot, requireAsset(snapshot, assetId))
+      console.log(JSON.stringify(exportEntry, null, 2))
+      return
+    }
+    if (command === 'catalog') {
+      const snapshot = await loader.load()
+      console.log(renderCatalogText(catalogSummary(snapshot)))
+      return
+    }
     if (command === 'refresh') {
       const env = {
         fetchFn: fetch,
@@ -151,6 +190,9 @@ async function main(): Promise<void> {
           ? { search: entry.value, limit: 10 }
           : { filter: entry.value, limit: 10 }
       ))
+      // P2: curation file lives next to the snapshot unless disabled.
+      const curationPath = resolve(dirname(resolve(options.snapshot)), 'curated.json')
+      const curationConfigured = !options.noCuration && existsSync(curationPath)
       const result = await refreshSnapshot(env, {
         limit: options.limit ?? 25,
         topCount: options.top ?? 20,
@@ -158,6 +200,9 @@ async function main(): Promise<void> {
         queries: cliQueries.length > 0 ? cliQueries : DEFAULT_QUERIES,
         queriesFirst: cliQueries.length > 0,
         githubMap: DEFAULT_GITHUB_MAP,
+        block: options.block.length > 0 ? options.block : undefined,
+        allow: options.allow.length > 0 ? options.allow : undefined,
+        curationPath: curationConfigured ? curationPath : undefined,
       })
       const target = resolve(options.snapshot)
       mkdirSync(dirname(target), { recursive: true })

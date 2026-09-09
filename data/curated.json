@@ -1,0 +1,42 @@
+{
+  "version": 1,
+  "updated_at": "2026-09-08T00:00:00Z",
+  "entries": [
+    {
+      "asset_id": "facebook/voxpopuli",
+      "provider": "github",
+      "url": "https://github.com/facebookresearch/voxpopuli",
+      "authority": "canonical repository of the VoxPopuli maintainers (facebookresearch); the dataset's release home"
+    },
+    {
+      "asset_id": "mozilla-foundation/common_voice_17_0",
+      "provider": "github",
+      "url": "https://github.com/mozilla/common-voice",
+      "authority": "canonical project repository of the Common Voice maintainers (Mozilla); dataset releases are published there"
+    },
+    {
+      "asset_id": "cardiffnlp/tweet_eval",
+      "provider": "github",
+      "url": "https://github.com/cardiffnlp/tweeteval",
+      "authority": "official TweetEval repository (cardiffnlp), the dataset's release home"
+    },
+    {
+      "asset_id": "mteb/sts14-sts",
+      "provider": "github",
+      "url": "https://github.com/embeddings-benchmark/mteb",
+      "authority": "official MTEB benchmark repository (embeddings-benchmark); dataset files live in its data tree"
+    },
+    {
+      "asset_id": "openai/gsm8k",
+      "provider": "github",
+      "url": "https://github.com/openai/grade-school-math",
+      "authority": "official GSM8K repository (openai); the dataset's release home"
+    },
+    {
+      "asset_id": "nyu-mll/glue",
+      "provider": "github",
+      "url": "https://github.com/nyu-mll/GLUE-baselines",
+      "authority": "official GLUE baselines repository (nyu-mll) for the GLUE benchmark datasets"
+    }
+  ]
+}
